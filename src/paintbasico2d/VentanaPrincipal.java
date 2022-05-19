@@ -276,10 +276,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         figuras = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
+        jPanel12 = new javax.swing.JPanel();
         botonNuevo = new javax.swing.JButton();
         botonAbrir = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
+        jPanel13 = new javax.swing.JPanel();
         botonTrazoLibre = new javax.swing.JToggleButton();
         botonLinea = new javax.swing.JToggleButton();
         botonRectan = new javax.swing.JToggleButton();
@@ -290,18 +292,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         bCubicCurve = new javax.swing.JToggleButton();
         bPolygon = new javax.swing.JToggleButton();
         bArea = new javax.swing.JToggleButton();
-        ToggleButtonMover = new javax.swing.JToggleButton();
-        botonSeleccionador = new javax.swing.JToggleButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        jPanel5 = new javax.swing.JPanel();
-        Color colores[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
-        ComboBoxColors = new javax.swing.JComboBox<>(colores);
-        jSeparator4 = new javax.swing.JToolBar.Separator();
-        spinnerGrosor = new javax.swing.JSpinner();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jPanel15 = new javax.swing.JPanel();
         rellenoToggleButton = new javax.swing.JToggleButton();
         transparenciaToggleButton = new javax.swing.JToggleButton();
         alisarToggleButton = new javax.swing.JToggleButton();
+        Color colores[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
+        ComboBoxColors = new javax.swing.JComboBox<>(colores);
+        spinnerGrosor = new javax.swing.JSpinner();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        jPanel14 = new javax.swing.JPanel();
+        ToggleButtonMover = new javax.swing.JToggleButton();
+        botonSeleccionador = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         escritorio = new javax.swing.JDesktopPane();
         jPanel3 = new javax.swing.JPanel();
@@ -345,8 +347,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
+        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Fichero"));
+
         botonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/nuevo.png"))); // NOI18N
-        botonNuevo.setFocusable(false);
         botonNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonNuevo.setPreferredSize(new java.awt.Dimension(35, 35));
         botonNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -355,10 +358,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonNuevoActionPerformed(evt);
             }
         });
-        jToolBar1.add(botonNuevo);
+        jPanel12.add(botonNuevo);
 
         botonAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/abrir.png"))); // NOI18N
-        botonAbrir.setFocusable(false);
         botonAbrir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonAbrir.setPreferredSize(new java.awt.Dimension(35, 35));
         botonAbrir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -367,10 +369,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonAbrirActionPerformed(evt);
             }
         });
-        jToolBar1.add(botonAbrir);
+        jPanel12.add(botonAbrir);
 
         botonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
-        botonGuardar.setFocusable(false);
         botonGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonGuardar.setPreferredSize(new java.awt.Dimension(35, 35));
         botonGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -379,12 +380,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonGuardarActionPerformed(evt);
             }
         });
-        jToolBar1.add(botonGuardar);
+        jPanel12.add(botonGuardar);
+
+        jToolBar1.add(jPanel12);
         jToolBar1.add(jSeparator1);
+
+        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Figuras"));
 
         figuras.add(botonTrazoLibre);
         botonTrazoLibre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trazo.png"))); // NOI18N
-        botonTrazoLibre.setFocusable(false);
         botonTrazoLibre.setPreferredSize(new java.awt.Dimension(35, 35));
         botonTrazoLibre.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botonTrazoLibre.addActionListener(new java.awt.event.ActionListener() {
@@ -392,11 +396,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonTrazoLibreActionPerformed(evt);
             }
         });
-        jToolBar1.add(botonTrazoLibre);
+        jPanel13.add(botonTrazoLibre);
 
         figuras.add(botonLinea);
         botonLinea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/linea.png"))); // NOI18N
-        botonLinea.setFocusable(false);
         botonLinea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonLinea.setPreferredSize(new java.awt.Dimension(35, 35));
         botonLinea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -405,11 +408,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonLineaActionPerformed(evt);
             }
         });
-        jToolBar1.add(botonLinea);
+        jPanel13.add(botonLinea);
 
         figuras.add(botonRectan);
         botonRectan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rectangulo.png"))); // NOI18N
-        botonRectan.setFocusable(false);
         botonRectan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonRectan.setPreferredSize(new java.awt.Dimension(35, 35));
         botonRectan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -418,11 +420,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonRectanActionPerformed(evt);
             }
         });
-        jToolBar1.add(botonRectan);
+        jPanel13.add(botonRectan);
 
         figuras.add(botonElipse);
         botonElipse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/elipse.png"))); // NOI18N
-        botonElipse.setFocusable(false);
         botonElipse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonElipse.setPreferredSize(new java.awt.Dimension(35, 35));
         botonElipse.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -431,11 +432,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonElipseActionPerformed(evt);
             }
         });
-        jToolBar1.add(botonElipse);
+        jPanel13.add(botonElipse);
 
         figuras.add(botonCurva);
         botonCurva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/curva.png"))); // NOI18N
-        botonCurva.setFocusable(false);
         botonCurva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonCurva.setPreferredSize(new java.awt.Dimension(35, 35));
         botonCurva.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -444,48 +444,48 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonCurvaActionPerformed(evt);
             }
         });
-        jToolBar1.add(botonCurva);
+        jPanel13.add(botonCurva);
 
         figuras.add(bRoundRectangle);
         bRoundRectangle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/7968882_rectangle_adobe illustrator tool_rectangle tool_icon.png"))); // NOI18N
-        bRoundRectangle.setFocusable(false);
         bRoundRectangle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bRoundRectangle.setPreferredSize(new java.awt.Dimension(35, 35));
         bRoundRectangle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         bRoundRectangle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bRoundRectangleActionPerformed(evt);
             }
         });
-        jToolBar1.add(bRoundRectangle);
+        jPanel13.add(bRoundRectangle);
 
         figuras.add(bArc2D);
         bArc2D.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/7832925_arc_design tools_tool_tools_icon.png"))); // NOI18N
-        bArc2D.setFocusable(false);
         bArc2D.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bArc2D.setPreferredSize(new java.awt.Dimension(35, 35));
         bArc2D.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         bArc2D.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bArc2DActionPerformed(evt);
             }
         });
-        jToolBar1.add(bArc2D);
+        jPanel13.add(bArc2D);
 
         figuras.add(bCubicCurve);
         bCubicCurve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9043763_3d_curve_auto_colon_icon.png"))); // NOI18N
-        bCubicCurve.setFocusable(false);
         bCubicCurve.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bCubicCurve.setPreferredSize(new java.awt.Dimension(35, 35));
         bCubicCurve.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         bCubicCurve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bCubicCurveActionPerformed(evt);
             }
         });
-        jToolBar1.add(bCubicCurve);
+        jPanel13.add(bCubicCurve);
 
         figuras.add(bPolygon);
         bPolygon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9054997_bx_polygon_icon.png"))); // NOI18N
-        bPolygon.setFocusable(false);
         bPolygon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bPolygon.setPreferredSize(new java.awt.Dimension(35, 35));
         bPolygon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         bPolygon.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -497,71 +497,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 bPolygonActionPerformed(evt);
             }
         });
-        jToolBar1.add(bPolygon);
+        jPanel13.add(bPolygon);
 
         figuras.add(bArea);
         bArea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/216130_area_chart_icon.png"))); // NOI18N
-        bArea.setFocusable(false);
         bArea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bArea.setPreferredSize(new java.awt.Dimension(35, 35));
         bArea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         bArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bAreaActionPerformed(evt);
             }
         });
-        jToolBar1.add(bArea);
+        jPanel13.add(bArea);
 
-        ToggleButtonMover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/seleccion.png"))); // NOI18N
-        ToggleButtonMover.setFocusable(false);
-        ToggleButtonMover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        ToggleButtonMover.setPreferredSize(new java.awt.Dimension(35, 35));
-        ToggleButtonMover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        ToggleButtonMover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ToggleButtonMoverActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(ToggleButtonMover);
-
-        botonSeleccionador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9111124_select_icon (1).png"))); // NOI18N
-        botonSeleccionador.setFocusable(false);
-        botonSeleccionador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botonSeleccionador.setPreferredSize(new java.awt.Dimension(35, 35));
-        botonSeleccionador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        botonSeleccionador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSeleccionadorActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(botonSeleccionador);
+        jToolBar1.add(jPanel13);
         jToolBar1.add(jSeparator3);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        ComboBoxColors.setPreferredSize(new java.awt.Dimension(35, 35));
-        ComboBoxColors.setRenderer(new ColorCellRender());
-        ComboBoxColors.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBoxColorsActionPerformed(evt);
-            }
-        });
-        jPanel5.add(ComboBoxColors);
-
-        jToolBar1.add(jPanel5);
-        jToolBar1.add(jSeparator4);
-
-        spinnerGrosor.setPreferredSize(new java.awt.Dimension(50, 25));
-        spinnerGrosor.setValue(5.0f);
-        spinnerGrosor.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                spinnerGrosorStateChanged(evt);
-            }
-        });
-        jToolBar1.add(spinnerGrosor);
-        jToolBar1.add(jSeparator2);
+        jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Atributos"));
 
         rellenoToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rellenar.png"))); // NOI18N
-        rellenoToggleButton.setFocusable(false);
         rellenoToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         rellenoToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
         rellenoToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -570,10 +525,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 rellenoToggleButtonActionPerformed(evt);
             }
         });
-        jToolBar1.add(rellenoToggleButton);
+        jPanel15.add(rellenoToggleButton);
 
         transparenciaToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/transparencia.png"))); // NOI18N
-        transparenciaToggleButton.setFocusable(false);
         transparenciaToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         transparenciaToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
         transparenciaToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -582,10 +536,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 transparenciaToggleButtonActionPerformed(evt);
             }
         });
-        jToolBar1.add(transparenciaToggleButton);
+        jPanel15.add(transparenciaToggleButton);
 
         alisarToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/alisar.png"))); // NOI18N
-        alisarToggleButton.setFocusable(false);
         alisarToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         alisarToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
         alisarToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -594,7 +547,54 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 alisarToggleButtonActionPerformed(evt);
             }
         });
-        jToolBar1.add(alisarToggleButton);
+        jPanel15.add(alisarToggleButton);
+
+        ComboBoxColors.setPreferredSize(new java.awt.Dimension(35, 35));
+        ComboBoxColors.setRenderer(new ColorCellRender());
+        ComboBoxColors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxColorsActionPerformed(evt);
+            }
+        });
+        jPanel15.add(ComboBoxColors);
+
+        spinnerGrosor.setPreferredSize(new java.awt.Dimension(50, 25));
+        spinnerGrosor.setValue(5.0f);
+        spinnerGrosor.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerGrosorStateChanged(evt);
+            }
+        });
+        jPanel15.add(spinnerGrosor);
+
+        jToolBar1.add(jPanel15);
+        jToolBar1.add(jSeparator4);
+
+        jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Tools"));
+
+        ToggleButtonMover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/seleccion.png"))); // NOI18N
+        ToggleButtonMover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ToggleButtonMover.setPreferredSize(new java.awt.Dimension(35, 35));
+        ToggleButtonMover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        ToggleButtonMover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ToggleButtonMoverActionPerformed(evt);
+            }
+        });
+        jPanel14.add(ToggleButtonMover);
+
+        botonSeleccionador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9111124_select_icon (1).png"))); // NOI18N
+        botonSeleccionador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonSeleccionador.setPreferredSize(new java.awt.Dimension(35, 35));
+        botonSeleccionador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonSeleccionador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSeleccionadorActionPerformed(evt);
+            }
+        });
+        jPanel14.add(botonSeleccionador);
+
+        jToolBar1.add(jPanel14);
 
         jPanel1.add(jToolBar1);
 
@@ -610,7 +610,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 288, Short.MAX_VALUE)
+            .addGap(0, 271, Short.MAX_VALUE)
         );
 
         jPanel2.add(escritorio, java.awt.BorderLayout.CENTER);
@@ -1890,16 +1890,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
