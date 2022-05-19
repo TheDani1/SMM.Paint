@@ -41,8 +41,11 @@ import sm.dgs.graficos.TrazoLibre2D;
 import sm.dgs.iu.Lienzo2D.Figura;
 import sm.dgs.iu.LienzoAdapter;
 import sm.dgs.iu.LienzoEvent;
+import sm.image.EqualizationOp;
 import sm.image.KernelProducer;
 import sm.image.LookupTableProducer;
+import sm.image.SepiaOp;
+import sm.image.TintOp;
 import sm.image.color.GreyColorSpace;
 
 /**
@@ -302,7 +305,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonNuevo = new javax.swing.JButton();
         botonAbrir = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
         jPanel13 = new javax.swing.JPanel();
         botonTrazoLibre = new javax.swing.JToggleButton();
         botonLinea = new javax.swing.JToggleButton();
@@ -314,7 +316,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         bCubicCurve = new javax.swing.JToggleButton();
         bPolygon = new javax.swing.JToggleButton();
         bArea = new javax.swing.JToggleButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
         jPanel15 = new javax.swing.JPanel();
         rellenoToggleButton = new javax.swing.JToggleButton();
         transparenciaToggleButton = new javax.swing.JToggleButton();
@@ -322,7 +323,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Color colores[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
         ComboBoxColors = new javax.swing.JComboBox<>(colores);
         spinnerGrosor = new javax.swing.JSpinner();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
         jPanel14 = new javax.swing.JPanel();
         ToggleButtonMover = new javax.swing.JToggleButton();
         botonSeleccionador = new javax.swing.JToggleButton();
@@ -353,8 +353,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         bExtraccionBandas = new javax.swing.JButton();
         comboBoxEspaciosColor = new javax.swing.JComboBox<>();
-        jPanel16 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
         bCombinacion = new javax.swing.JButton();
+        bTintar = new javax.swing.JButton();
+        bSepia = new javax.swing.JButton();
+        bEcualizador = new javax.swing.JButton();
+        bRojo = new javax.swing.JButton();
+        jNumColors = new javax.swing.JSlider();
+        jSlider2 = new javax.swing.JSlider();
         jPanel6 = new javax.swing.JPanel();
         labelEstado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -410,7 +416,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel12.add(botonGuardar);
 
         jToolBar1.add(jPanel12);
-        jToolBar1.add(jSeparator1);
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Figuras"));
 
@@ -539,7 +544,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel13.add(bArea);
 
         jToolBar1.add(jPanel13);
-        jToolBar1.add(jSeparator3);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Atributos"));
 
@@ -595,7 +599,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel15.add(spinnerGrosor);
 
         jToolBar1.add(jPanel15);
-        jToolBar1.add(jSeparator4);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Tools"));
 
@@ -633,7 +636,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1934, Short.MAX_VALUE)
+            .addGap(0, 2364, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -875,13 +878,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel4.add(jPanel5);
 
-        jPanel16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Operadores"));
 
         bCombinacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/combinar.png"))); // NOI18N
         bCombinacion.setPreferredSize(new java.awt.Dimension(35, 35));
-        jPanel16.add(bCombinacion);
+        jPanel17.add(bCombinacion);
 
-        jPanel4.add(jPanel16);
+        bTintar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/tintar.png"))); // NOI18N
+        bTintar.setPreferredSize(new java.awt.Dimension(35, 35));
+        bTintar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bTintarActionPerformed(evt);
+            }
+        });
+        jPanel17.add(bTintar);
+
+        bSepia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/sepia.png"))); // NOI18N
+        bSepia.setPreferredSize(new java.awt.Dimension(35, 35));
+        bSepia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSepiaActionPerformed(evt);
+            }
+        });
+        jPanel17.add(bSepia);
+
+        bEcualizador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ecualizar.png"))); // NOI18N
+        bEcualizador.setPreferredSize(new java.awt.Dimension(35, 35));
+        bEcualizador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEcualizadorActionPerformed(evt);
+            }
+        });
+        jPanel17.add(bEcualizador);
+
+        bRojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rojo.png"))); // NOI18N
+        bRojo.setPreferredSize(new java.awt.Dimension(35, 35));
+        jPanel17.add(bRojo);
+
+        jNumColors.setMinimum(5);
+        jNumColors.setValue(5);
+        jPanel17.add(jNumColors);
+        jPanel17.add(jSlider2);
+
+        jPanel4.add(jPanel17);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
 
@@ -1884,10 +1923,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void bExtraccionBandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExtraccionBandasActionPerformed
 
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        
+        BufferedImage imgS = vi.getLienzo().getImage();
+        WritableRaster rasterS = imgS.getRaster();
 
 //VentanaInterna vi = new VentanaInterna();
         //escritorio.add(vi);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < rasterS.getNumBands(); i++) {
 
             BufferedImage img = getImageBand(vi.getLienzo().getImage(), i);
 
@@ -1914,7 +1956,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi.getLienzo().getImage();
-        
+
         ColorSpace cs;
 
         switch (comboBoxEspaciosColor.getSelectedIndex()) {
@@ -1924,23 +1966,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 break;
             }
             case 0: {
-                 cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
-                
+                cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+
                 break;
             }
             case 2: {
                 cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
-                
+
                 break;
             }
             case 3: {
                 cs = new GreyColorSpace();
-                
+
                 break;
             }
             default:
                 cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
-                
+
                 break;
         }
 
@@ -1948,6 +1990,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         BufferedImage imgOut = cop.filter(imgSource, null);
         vi.getLienzo().setImage(imgOut);
     }//GEN-LAST:event_comboBoxEspaciosColorActionPerformed
+
+    private void bTintarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTintarActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        BufferedImage imgSource = vi.getLienzo().getImage();
+        
+        TintOp tintado = new TintOp(Color.red, 0.5f);
+        BufferedImage imgOut = tintado.filter(imgSource, null);
+        vi.getLienzo().setImage(imgOut);
+        
+        vi.getLienzo().repaint();
+    }//GEN-LAST:event_bTintarActionPerformed
+
+    private void bSepiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSepiaActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        BufferedImage imgSource = vi.getLienzo().getImage();
+        
+        SepiaOp sepia = new SepiaOp();
+        BufferedImage imgOut = sepia.filter(imgSource, null);
+        vi.getLienzo().setImage(imgOut);
+        
+        vi.getLienzo().repaint();
+    }//GEN-LAST:event_bSepiaActionPerformed
+
+    private void bEcualizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEcualizadorActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        BufferedImage imgSource = vi.getLienzo().getImage();
+        
+        EqualizationOp ecualizacion = new EqualizationOp();
+        BufferedImage imgOut = ecualizacion.filter(imgSource, null);
+        vi.getLienzo().setImage(imgOut);
+        
+        vi.getLienzo().repaint();
+    }//GEN-LAST:event_bEcualizadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1992,11 +2067,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton bCuadratica;
     private javax.swing.JToggleButton bCubicCurve;
     private javax.swing.JButton bDisminuir;
+    private javax.swing.JButton bEcualizador;
     private javax.swing.JButton bExtraccionBandas;
     private javax.swing.JButton bIluminar;
     private javax.swing.JButton bOscurecer;
     private javax.swing.JToggleButton bPolygon;
+    private javax.swing.JButton bRojo;
     private javax.swing.JToggleButton bRoundRectangle;
+    private javax.swing.JButton bSepia;
+    private javax.swing.JButton bTintar;
     private javax.swing.JToggleButton bTrapezoide;
     private javax.swing.JButton botonAbrir;
     private javax.swing.JButton botonContraste;
@@ -2013,6 +2092,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.ButtonGroup figuras;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JSlider jNumColors;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -2020,7 +2100,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2029,9 +2109,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator3;
-    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JSlider jSlider2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelEstado;
     private javax.swing.JMenuItem menuAbrir;
