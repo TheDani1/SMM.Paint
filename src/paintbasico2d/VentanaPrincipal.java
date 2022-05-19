@@ -487,6 +487,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         bPolygon.setFocusable(false);
         bPolygon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bPolygon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bPolygon.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                bPolygonStateChanged(evt);
+            }
+        });
         bPolygon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bPolygonActionPerformed(evt);
@@ -1800,6 +1805,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (!(vi == null)) {
             vi.getLienzo().setFigura(Figura.POLIGONO);
         }
+        
+        if(!bPolygon.isSelected()){
+            vi.getLienzo().setPaso_poligono(0);
+        }
     }//GEN-LAST:event_bPolygonActionPerformed
 
     private void bAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAreaActionPerformed
@@ -1808,6 +1817,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             vi.getLienzo().setFigura(Figura.AREA);
         }
     }//GEN-LAST:event_bAreaActionPerformed
+
+    private void bPolygonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_bPolygonStateChanged
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        
+        if(!bPolygon.isSelected()){
+            vi.getLienzo().setPaso_poligono(0);
+        }
+    }//GEN-LAST:event_bPolygonStateChanged
 
     /**
      * @param args the command line arguments
