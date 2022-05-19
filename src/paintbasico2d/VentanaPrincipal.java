@@ -17,6 +17,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ByteLookupTable;
+import java.awt.image.ColorConvertOp;
 import java.awt.image.ColorModel;
 import java.awt.image.ComponentColorModel;
 import java.awt.image.ConvolveOp;
@@ -42,6 +43,7 @@ import sm.dgs.iu.LienzoAdapter;
 import sm.dgs.iu.LienzoEvent;
 import sm.image.KernelProducer;
 import sm.image.LookupTableProducer;
+import sm.image.color.GreyColorSpace;
 
 /**
  *
@@ -274,12 +276,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ComponentColorModel cm = new ComponentColorModel(cs, false, false,
                 Transparency.OPAQUE,
                 DataBuffer.TYPE_BYTE);
-        
+
         //Creamos el nuevo raster a partir del raster de la imagen original
         int vband[] = {banda};
         WritableRaster bRaster = (WritableRaster) img.getRaster().createWritableChild(0, 0,
                 img.getWidth(), img.getHeight(), 0, 0, vband);
-        
+
         //Creamos una nueva imagen que contiene como raster el correspondiente a la banda
         return new BufferedImage(cm, bRaster, false, null);
     }
@@ -350,7 +352,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         bDisminuir = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         bExtraccionBandas = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxEspaciosColor = new javax.swing.JComboBox<>();
         jPanel16 = new javax.swing.JPanel();
         bCombinacion = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -863,8 +865,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jPanel5.add(bExtraccionBandas);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel5.add(jComboBox1);
+        comboBoxEspaciosColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RGB", "YCC", "GREY", "Grey++" }));
+        comboBoxEspaciosColor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxEspaciosColorActionPerformed(evt);
+            }
+        });
+        jPanel5.add(comboBoxEspaciosColor);
 
         jPanel4.add(jPanel5);
 
@@ -881,7 +888,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        labelEstado.setText("jLabel1");
+        labelEstado.setText("Barra de Estado");
         jPanel6.add(labelEstado);
 
         jPanel3.add(jPanel6, java.awt.BorderLayout.SOUTH);
@@ -1877,22 +1884,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void bExtraccionBandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExtraccionBandasActionPerformed
 
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
-        
+
 //VentanaInterna vi = new VentanaInterna();
         //escritorio.add(vi);
-        
-        for(int i = 0; i < 3; i++){
-            
+        for (int i = 0; i < 3; i++) {
+
             BufferedImage img = getImageBand(vi.getLienzo().getImage(), i);
-            
+
             VentanaInterna n_vi = new VentanaInterna();
             escritorio.add(n_vi);
             n_vi.getLienzo().setImage(img);
             n_vi.setTitle("[" + i + "]");
             n_vi.setVisible(true);
-            
+
         }
-        
 
         //IMAGEN
         /*BufferedImage img;
@@ -1900,11 +1905,49 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vi.getLienzo().setImage(img);
         vi.setTitle("[1]");
         vi.setVisible(true);*/
-
         // 2) Crear el objeto manejador (hacer el "new" de la clase anterior)
         vi.addInternalFrameListener(new ManejadorVentanaInterna());
         vi.getLienzo().addLienzoListener(new MiManejadorLienzo());
     }//GEN-LAST:event_bExtraccionBandasActionPerformed
+
+    private void comboBoxEspaciosColorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEspaciosColorActionPerformed
+
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        BufferedImage imgSource = vi.getLienzo().getImage();
+        
+        ColorSpace cs;
+
+        switch (comboBoxEspaciosColor.getSelectedIndex()) {
+            case 1: {
+                cs = ColorSpace.getInstance(ColorSpace.CS_PYCC);
+
+                break;
+            }
+            case 0: {
+                 cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+                
+                break;
+            }
+            case 2: {
+                cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);
+                
+                break;
+            }
+            case 3: {
+                cs = new GreyColorSpace();
+                
+                break;
+            }
+            default:
+                cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+                
+                break;
+        }
+
+        ColorConvertOp cop = new ColorConvertOp(cs, null);
+        BufferedImage imgOut = cop.filter(imgSource, null);
+        vi.getLienzo().setImage(imgOut);
+    }//GEN-LAST:event_comboBoxEspaciosColorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1965,9 +2008,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton botonRectan;
     private javax.swing.JToggleButton botonSeleccionador;
     private javax.swing.JToggleButton botonTrazoLibre;
+    private javax.swing.JComboBox<String> comboBoxEspaciosColor;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.ButtonGroup figuras;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
