@@ -285,6 +285,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonRectan = new javax.swing.JToggleButton();
         botonElipse = new javax.swing.JToggleButton();
         botonCurva = new javax.swing.JToggleButton();
+        bRoundRectangle = new javax.swing.JToggleButton();
+        bArc2D = new javax.swing.JToggleButton();
+        bCubicCurve = new javax.swing.JToggleButton();
+        bPolygon = new javax.swing.JToggleButton();
+        bArea = new javax.swing.JToggleButton();
         ToggleButtonMover = new javax.swing.JToggleButton();
         botonSeleccionador = new javax.swing.JToggleButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
@@ -441,6 +446,66 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(botonCurva);
 
+        figuras.add(bRoundRectangle);
+        bRoundRectangle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/7968882_rectangle_adobe illustrator tool_rectangle tool_icon.png"))); // NOI18N
+        bRoundRectangle.setFocusable(false);
+        bRoundRectangle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bRoundRectangle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bRoundRectangle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRoundRectangleActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bRoundRectangle);
+
+        figuras.add(bArc2D);
+        bArc2D.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/7832925_arc_design tools_tool_tools_icon.png"))); // NOI18N
+        bArc2D.setFocusable(false);
+        bArc2D.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bArc2D.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bArc2D.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bArc2DActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bArc2D);
+
+        figuras.add(bCubicCurve);
+        bCubicCurve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9043763_3d_curve_auto_colon_icon.png"))); // NOI18N
+        bCubicCurve.setFocusable(false);
+        bCubicCurve.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bCubicCurve.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bCubicCurve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCubicCurveActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bCubicCurve);
+
+        figuras.add(bPolygon);
+        bPolygon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9054997_bx_polygon_icon.png"))); // NOI18N
+        bPolygon.setFocusable(false);
+        bPolygon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bPolygon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bPolygon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPolygonActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bPolygon);
+
+        figuras.add(bArea);
+        bArea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/216130_area_chart_icon.png"))); // NOI18N
+        bArea.setFocusable(false);
+        bArea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bArea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bArea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAreaActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bArea);
+
         ToggleButtonMover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/seleccion.png"))); // NOI18N
         ToggleButtonMover.setFocusable(false);
         ToggleButtonMover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -540,7 +605,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 321, Short.MAX_VALUE)
+            .addGap(0, 288, Short.MAX_VALUE)
         );
 
         jPanel2.add(escritorio, java.awt.BorderLayout.CENTER);
@@ -1709,6 +1774,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonSeleccionadorActionPerformed
 
+    private void bRoundRectangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRoundRectangleActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        if (!(vi == null)) {
+            vi.getLienzo().setFigura(Figura.ROUNDRECTANGULO);
+        }
+    }//GEN-LAST:event_bRoundRectangleActionPerformed
+
+    private void bArc2DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bArc2DActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        if (!(vi == null)) {
+            vi.getLienzo().setFigura(Figura.ARCO);
+        }
+    }//GEN-LAST:event_bArc2DActionPerformed
+
+    private void bCubicCurveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCubicCurveActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        if (!(vi == null)) {
+            vi.getLienzo().setFigura(Figura.CURVACUBICA);
+        }
+    }//GEN-LAST:event_bCubicCurveActionPerformed
+
+    private void bPolygonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPolygonActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        if (!(vi == null)) {
+            vi.getLienzo().setFigura(Figura.POLIGONO);
+        }
+    }//GEN-LAST:event_bPolygonActionPerformed
+
+    private void bAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAreaActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        if (!(vi == null)) {
+            vi.getLienzo().setFigura(Figura.AREA);
+        }
+    }//GEN-LAST:event_bAreaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1745,11 +1845,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton b180;
     private javax.swing.JButton b270;
     private javax.swing.JButton b90;
+    private javax.swing.JToggleButton bArc2D;
+    private javax.swing.JToggleButton bArea;
     private javax.swing.JButton bAumentar;
     private javax.swing.JButton bCuadratica;
+    private javax.swing.JToggleButton bCubicCurve;
     private javax.swing.JButton bDisminuir;
     private javax.swing.JButton bIluminar;
     private javax.swing.JButton bOscurecer;
+    private javax.swing.JToggleButton bPolygon;
+    private javax.swing.JToggleButton bRoundRectangle;
     private javax.swing.JToggleButton bTrapezoide;
     private javax.swing.JButton botonAbrir;
     private javax.swing.JButton botonContraste;
