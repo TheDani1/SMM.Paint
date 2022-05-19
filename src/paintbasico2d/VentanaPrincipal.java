@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -24,6 +25,7 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JSpinner;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -242,8 +244,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else if (sfigura instanceof TrazoLibre2D) {
                 botonTrazoLibre.setSelected(true);
             }
+            
+            System.out.print("GROSOR: " + evt.getfigura().getGrosor_trazo());
+            int a = evt.getfigura().getGrosor_trazo().intValue();
+            spinnerGrosor.setValue(a);
+            
         }
 
+    }
+    
+    public static float getFloat(JSpinner spinner) {
+        float rv = 0;
+        Object o = spinner.getValue();
+        if (o != null) {
+            if (o instanceof Number) {
+                rv = ((Number) o).floatValue();
+            }//  w ww .j a  v  a2s.  c om
+        }
+        return rv;
     }
 
     /**
@@ -462,7 +480,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel5);
         jToolBar1.add(jSeparator4);
 
-        spinnerGrosor.setValue(5);
+        spinnerGrosor.setPreferredSize(new java.awt.Dimension(50, 25));
+        spinnerGrosor.setValue(5.0f);
         spinnerGrosor.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 spinnerGrosorStateChanged(evt);
@@ -867,11 +886,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         if (!(vi == null)) {
 
-            Integer a = (int) spinnerGrosor.getValue();
+            //Integer a = (int) spinnerGrosor.getValue();
 
-            float b = a.floatValue();
+            //float b = a.floatValue();
+            
+            vi.getLienzo().setGrosor_trazo(getFloat(spinnerGrosor));
 
-            vi.getLienzo().setStroke(new BasicStroke(b));
+            vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
 
         }
 
@@ -1682,7 +1703,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             vi.getLienzo().setSeleccionar(true);
         } else {
             vi.getLienzo().setSeleccionar(false);
-            vi.getLienzo().setStroke(new BasicStroke(5.0f));
+            vi.getLienzo().setGrosor_trazo(5.0f);
+            vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+            vi.getLienzo().setColor(Color.BLACK);
         }
     }//GEN-LAST:event_botonSeleccionadorActionPerformed
 
