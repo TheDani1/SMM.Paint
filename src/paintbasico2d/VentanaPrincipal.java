@@ -9,6 +9,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -26,6 +27,10 @@ import javax.swing.JFileChooser;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import sm.dgs.graficos.Elipse2D;
+import sm.dgs.graficos.Linea2D;
+import sm.dgs.graficos.Rectangulo2D;
+import sm.dgs.graficos.TrazoLibre2D;
 import sm.dgs.iu.Lienzo2D.Figura;
 import sm.dgs.iu.LienzoAdapter;
 import sm.dgs.iu.LienzoEvent;
@@ -118,6 +123,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         @Override
         public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+
             VentanaInterna vi = (VentanaInterna) evt.getInternalFrame();
             Color lcolor = vi.getLienzo().getColor();
             Figura sfigura = vi.getLienzo().getFigura();
@@ -187,8 +193,57 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public class MiManejadorLienzo extends LienzoAdapter {
 
         public void shapeAdded(LienzoEvent evt) {
-            labelEstado.setText("Figura " + evt.getForma() + "añadida");
+            labelEstado.setText("Figura " + " x " + "añadida");
         }
+
+        public void propertyChange(LienzoEvent evt) {
+
+            labelEstado.setText("Figura" + " x " + "seleccionada" + "Transparencia: " + evt.getfigura().getTransparencia() + " Alisar: " + evt.getfigura().getAntialiasing());
+
+            Color lcolor = evt.getfigura().getColor();
+            Shape sfigura = evt.getfigura().getTipoFigura();
+
+            rellenoToggleButton.setSelected(evt.getfigura().getRelleno());
+            transparenciaToggleButton.setSelected(evt.getfigura().getTransparencia());
+            alisarToggleButton.setSelected(evt.getfigura().getAntialiasing());
+
+            if (lcolor == Color.BLACK) {
+
+                ComboBoxColors.setSelectedIndex(0);
+
+            } else if (lcolor == Color.RED) {
+
+                ComboBoxColors.setSelectedIndex(1);
+
+            } else if (lcolor == Color.BLUE) {
+
+                ComboBoxColors.setSelectedIndex(2);
+
+            } else if (lcolor == Color.WHITE) {
+
+                ComboBoxColors.setSelectedIndex(3);
+
+            } else if (lcolor == Color.YELLOW) {
+
+                ComboBoxColors.setSelectedIndex(4);
+
+            } else if (lcolor == Color.GREEN) {
+
+                ComboBoxColors.setSelectedIndex(5);
+
+            }
+
+            if (sfigura instanceof Linea2D) {
+                botonLinea.setSelected(true);
+            } else if (sfigura instanceof Rectangulo2D) {
+                botonRectan.setSelected(true);
+            } else if (sfigura instanceof Elipse2D) {
+                botonElipse.setSelected(true);
+            } else if (sfigura instanceof TrazoLibre2D) {
+                botonTrazoLibre.setSelected(true);
+            }
+        }
+
     }
 
     /**
@@ -970,8 +1025,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void ComboBoxFiltrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxFiltrosActionPerformed
         VentanaInterna vi = (VentanaInterna) (escritorio.getSelectedFrame());
 
-        System.out.println(ComboBoxFiltros.getSelectedIndex());
-
         switch (ComboBoxFiltros.getSelectedIndex()) {
             case 0:
                 if (vi != null) {
@@ -1168,6 +1221,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         // 2) Crear el objeto manejador (hacer el "new" de la clase anterior)
         vi.addInternalFrameListener(new ManejadorVentanaInterna());
+        vi.getLienzo().addLienzoListener(new MiManejadorLienzo());
     }//GEN-LAST:event_botonNuevoActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
@@ -1197,7 +1251,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         switch (ComboBoxColors.getSelectedIndex()) {
             case 0:
 
-                vi.getLienzo().setColor(Color.BLACK);
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor(Color.BLACK);
+                } else {
+                    vi.getLienzo().setColor(Color.BLACK);
+                }
 
                 this.repaint();
 
@@ -1205,7 +1263,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             case 1:
 
-                vi.getLienzo().setColor(Color.RED);
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor(Color.RED);
+                } else {
+                    vi.getLienzo().setColor(Color.RED);
+                }
 
                 this.repaint();
 
@@ -1213,7 +1275,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             case 2:
 
-                vi.getLienzo().setColor(Color.BLUE);
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor(Color.BLUE);
+                } else {
+                    vi.getLienzo().setColor(Color.BLUE);
+                }
 
                 this.repaint();
 
@@ -1221,14 +1287,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             case 3:
 
-                vi.getLienzo().setColor(Color.WHITE);
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor(Color.WHITE);
+                } else {
+                    vi.getLienzo().setColor(Color.WHITE);
+                }
 
                 this.repaint();
 
                 break;
             case 4:
 
-                vi.getLienzo().setColor(Color.YELLOW);
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor(Color.YELLOW);
+                } else {
+                    vi.getLienzo().setColor(Color.YELLOW);
+                }
 
                 this.repaint();
 
@@ -1236,7 +1310,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             case 5:
 
-                vi.getLienzo().setColor(Color.GREEN);
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor(Color.GREEN);
+                } else {
+                    vi.getLienzo().setColor(Color.GREEN);
+                }
 
                 this.repaint();
 
@@ -1246,10 +1324,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void transparenciaToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transparenciaToggleButtonActionPerformed
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
-        if (transparenciaToggleButton.isSelected()) {
-            vi.getLienzo().setTransparencia(true);
+
+        if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+            if (transparenciaToggleButton.isSelected()) {
+                vi.getLienzo().getFiguraSeleccionada().setTransparencia(true);
+            } else {
+                vi.getLienzo().getFiguraSeleccionada().setTransparencia(false);
+            }
         } else {
-            vi.getLienzo().setTransparencia(false);
+            if (transparenciaToggleButton.isSelected()) {
+                vi.getLienzo().setTransparencia(true);
+            } else {
+                vi.getLienzo().setTransparencia(false);
+            }
         }
 
         this.repaint();
@@ -1257,10 +1344,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void alisarToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alisarToggleButtonActionPerformed
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
-        if (alisarToggleButton.isSelected()) {
-            vi.getLienzo().setAntialiasing(true);
+
+        if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+            if (alisarToggleButton.isSelected()) {
+                vi.getLienzo().getFiguraSeleccionada().setAntialiasing(true);
+            } else {
+                vi.getLienzo().getFiguraSeleccionada().setAntialiasing(false);
+            }
         } else {
-            vi.getLienzo().setAntialiasing(false);
+            if (alisarToggleButton.isSelected()) {
+                vi.getLienzo().setAntialiasing(true);
+            } else {
+                vi.getLienzo().setAntialiasing(false);
+            }
         }
 
         this.repaint();
@@ -1268,10 +1364,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void rellenoToggleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rellenoToggleButtonActionPerformed
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
-        if (rellenoToggleButton.isSelected()) {
-            vi.getLienzo().setRelleno(true);
+
+        if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+            
+            System.out.print("Relleno Figura Seleccionada");
+            
+            if (rellenoToggleButton.isSelected()) {
+                vi.getLienzo().getFiguraSeleccionada().setRelleno(true);
+            } else {
+                vi.getLienzo().getFiguraSeleccionada().setRelleno(false);
+            }
         } else {
-            vi.getLienzo().setRelleno(false);
+            
+            System.out.print("Relleno Figura Lienzo");
+            
+            if (rellenoToggleButton.isSelected()) {
+                vi.getLienzo().setRelleno(true);
+            } else {
+                vi.getLienzo().setRelleno(false);
+            }
         }
 
         this.repaint();

@@ -274,9 +274,6 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="ToggleButtonMover">
               <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="default"/>
-                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/iconos/seleccion.png"/>
                 </Property>
@@ -293,9 +290,6 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="botonSeleccionador">
               <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="default"/>
-                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/iconos/9111124_select_icon (1).png"/>
                 </Property>
