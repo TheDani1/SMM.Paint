@@ -917,6 +917,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jNumColors.setMinimum(5);
         jNumColors.setValue(5);
+        jNumColors.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jNumColorsStateChanged(evt);
+            }
+        });
+        jNumColors.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jNumColorsFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jNumColorsFocusLost(evt);
+            }
+        });
         jPanel17.add(jNumColors);
         jPanel17.add(jSlider2);
 
@@ -1150,6 +1163,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void sliderBrilloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sliderBrilloFocusLost
         imgFuente = null;
+        
     }//GEN-LAST:event_sliderBrilloFocusLost
 
     private void sliderBrilloStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderBrilloStateChanged
@@ -2023,6 +2037,25 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         vi.getLienzo().repaint();
     }//GEN-LAST:event_bEcualizadorActionPerformed
+
+    private void jNumColorsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jNumColorsFocusGained
+        VentanaInterna vi = (VentanaInterna) (escritorio.getSelectedFrame());
+        if (vi != null) {
+            ColorModel cm = vi.getLienzo().getImage().getColorModel();
+            WritableRaster raster = vi.getLienzo().getImage().copyData(null);
+            boolean alfaPre = vi.getLienzo().getImage().isAlphaPremultiplied();
+            imgFuente = new BufferedImage(cm, raster, alfaPre, null);
+        }
+    }//GEN-LAST:event_jNumColorsFocusGained
+
+    private void jNumColorsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jNumColorsFocusLost
+        imgFuente = null;
+        jNumColors.setValue(5);
+    }//GEN-LAST:event_jNumColorsFocusLost
+
+    private void jNumColorsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jNumColorsStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jNumColorsStateChanged
 
     /**
      * @param args the command line arguments

@@ -1021,6 +1021,11 @@
                     <Property name="minimum" type="int" value="5"/>
                     <Property name="value" type="int" value="5"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jNumColorsStateChanged"/>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jNumColorsFocusGained"/>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jNumColorsFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JSlider" name="jSlider2">
                 </Component>
