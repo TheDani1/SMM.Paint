@@ -7,6 +7,8 @@ package paintbasico2d;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Composite;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Shape;
@@ -29,7 +31,9 @@ import java.awt.image.RescaleOp;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JSpinner;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.filechooser.FileFilter;
@@ -38,10 +42,15 @@ import sm.dgs.graficos.Elipse2D;
 import sm.dgs.graficos.Linea2D;
 import sm.dgs.graficos.Rectangulo2D;
 import sm.dgs.graficos.TrazoLibre2D;
+import sm.dgs.imagen.ColorBordeOp;
+import sm.dgs.imagen.MiOp;
+import sm.dgs.imagen.PosterizarOp;
+import sm.dgs.imagen.RojoOp;
 import sm.dgs.iu.Lienzo2D.Figura;
 import sm.dgs.iu.LienzoAdapter;
 import sm.dgs.iu.LienzoEvent;
 import sm.image.EqualizationOp;
+import sm.image.Histogram;
 import sm.image.KernelProducer;
 import sm.image.LookupTableProducer;
 import sm.image.SepiaOp;
@@ -257,6 +266,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             System.out.print("GROSOR: " + evt.getfigura().getGrosor_trazo());
             int a = evt.getfigura().getGrosor_trazo().intValue();
             spinnerGrosor.setValue(a);
+            
+            Composite composicion = evt.getfigura().getComposicion();
+            
+            //sliderTransparencia.setValue();
 
         }
 
@@ -317,15 +330,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         bPolygon = new javax.swing.JToggleButton();
         bArea = new javax.swing.JToggleButton();
         jPanel15 = new javax.swing.JPanel();
-        rellenoToggleButton = new javax.swing.JToggleButton();
-        transparenciaToggleButton = new javax.swing.JToggleButton();
-        alisarToggleButton = new javax.swing.JToggleButton();
         Color colores[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
         ComboBoxColors = new javax.swing.JComboBox<>(colores);
+        alisarToggleButton = new javax.swing.JToggleButton();
+        jPanel16 = new javax.swing.JPanel();
+        Color coloresRelleno[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
+        ComboBoxColorsRelleno = new javax.swing.JComboBox<>(coloresRelleno);
+        rellenoToggleButton = new javax.swing.JToggleButton();
+        jPanel19 = new javax.swing.JPanel();
+        sliderTransparencia = new javax.swing.JSlider();
+        transparenciaToggleButton = new javax.swing.JToggleButton();
+        jPanel18 = new javax.swing.JPanel();
         spinnerGrosor = new javax.swing.JSpinner();
+        Color coloresTrazo[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
+        ComboBoxColorsTrazo = new javax.swing.JComboBox<>(coloresTrazo);
         jPanel14 = new javax.swing.JPanel();
         ToggleButtonMover = new javax.swing.JToggleButton();
         botonSeleccionador = new javax.swing.JToggleButton();
+        jPanel20 = new javax.swing.JPanel();
+        bMi = new javax.swing.JButton();
+        bHistograma = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         escritorio = new javax.swing.JDesktopPane();
         jPanel3 = new javax.swing.JPanel();
@@ -360,7 +384,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         bEcualizador = new javax.swing.JButton();
         bRojo = new javax.swing.JButton();
         jNumColors = new javax.swing.JSlider();
-        jSlider2 = new javax.swing.JSlider();
+        sliderColorBorde = new javax.swing.JSlider();
         jPanel6 = new javax.swing.JPanel();
         labelEstado = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -381,6 +405,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Fichero"));
+        jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         botonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/nuevo.png"))); // NOI18N
         botonNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -418,6 +443,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel12);
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Figuras"));
+        jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         figuras.add(botonTrazoLibre);
         botonTrazoLibre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trazo.png"))); // NOI18N
@@ -547,27 +573,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Atributos"));
 
-        rellenoToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rellenar.png"))); // NOI18N
-        rellenoToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        rellenoToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
-        rellenoToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        rellenoToggleButton.addActionListener(new java.awt.event.ActionListener() {
+        ComboBoxColors.setPreferredSize(new java.awt.Dimension(35, 35));
+        ComboBoxColors.setRenderer(new ColorCellRender());
+        ComboBoxColors.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rellenoToggleButtonActionPerformed(evt);
+                ComboBoxColorsActionPerformed(evt);
             }
         });
-        jPanel15.add(rellenoToggleButton);
-
-        transparenciaToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/transparencia.png"))); // NOI18N
-        transparenciaToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        transparenciaToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
-        transparenciaToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        transparenciaToggleButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transparenciaToggleButtonActionPerformed(evt);
-            }
-        });
-        jPanel15.add(transparenciaToggleButton);
+        jPanel15.add(ComboBoxColors);
 
         alisarToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/alisar.png"))); // NOI18N
         alisarToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -580,14 +593,54 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jPanel15.add(alisarToggleButton);
 
-        ComboBoxColors.setPreferredSize(new java.awt.Dimension(35, 35));
-        ComboBoxColors.setRenderer(new ColorCellRender());
-        ComboBoxColors.addActionListener(new java.awt.event.ActionListener() {
+        jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        ComboBoxColorsRelleno.setPreferredSize(new java.awt.Dimension(35, 35));
+        ComboBoxColorsRelleno.setRenderer(new ColorCellRender());
+        ComboBoxColorsRelleno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBoxColorsActionPerformed(evt);
+                ComboBoxColorsRellenoActionPerformed(evt);
             }
         });
-        jPanel15.add(ComboBoxColors);
+        jPanel16.add(ComboBoxColorsRelleno);
+
+        rellenoToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rellenar.png"))); // NOI18N
+        rellenoToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        rellenoToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
+        rellenoToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        rellenoToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rellenoToggleButtonActionPerformed(evt);
+            }
+        });
+        jPanel16.add(rellenoToggleButton);
+
+        jPanel15.add(jPanel16);
+
+        jPanel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        sliderTransparencia.setMaximum(10);
+        sliderTransparencia.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderTransparenciaStateChanged(evt);
+            }
+        });
+        jPanel19.add(sliderTransparencia);
+
+        transparenciaToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/transparencia.png"))); // NOI18N
+        transparenciaToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        transparenciaToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
+        transparenciaToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        transparenciaToggleButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transparenciaToggleButtonActionPerformed(evt);
+            }
+        });
+        jPanel19.add(transparenciaToggleButton);
+
+        jPanel15.add(jPanel19);
+
+        jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         spinnerGrosor.setPreferredSize(new java.awt.Dimension(50, 25));
         spinnerGrosor.setValue(5.0f);
@@ -596,11 +649,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 spinnerGrosorStateChanged(evt);
             }
         });
-        jPanel15.add(spinnerGrosor);
+        jPanel18.add(spinnerGrosor);
+
+        ComboBoxColorsTrazo.setPreferredSize(new java.awt.Dimension(35, 35));
+        ComboBoxColorsTrazo.setRenderer(new ColorCellRender());
+        ComboBoxColorsTrazo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxColorsTrazoActionPerformed(evt);
+            }
+        });
+        jPanel18.add(ComboBoxColorsTrazo);
+
+        jPanel15.add(jPanel18);
 
         jToolBar1.add(jPanel15);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Tools"));
+        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         ToggleButtonMover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/seleccion.png"))); // NOI18N
         ToggleButtonMover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -626,6 +691,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jToolBar1.add(jPanel14);
 
+        jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Mi Operación"));
+        jPanel20.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        bMi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes ejemplo-20220512/image133.png"))); // NOI18N
+        bMi.setPreferredSize(new java.awt.Dimension(35, 35));
+        bMi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bMiActionPerformed(evt);
+            }
+        });
+        jPanel20.add(bMi);
+
+        bHistograma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/image63.png"))); // NOI18N
+        bHistograma.setPreferredSize(new java.awt.Dimension(35, 35));
+        bHistograma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bHistogramaActionPerformed(evt);
+            }
+        });
+        jPanel20.add(bHistograma);
+
+        jToolBar1.add(jPanel20);
+
         jPanel1.add(jToolBar1);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
@@ -640,7 +728,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 271, Short.MAX_VALUE)
+            .addGap(0, 259, Short.MAX_VALUE)
         );
 
         jPanel2.add(escritorio, java.awt.BorderLayout.CENTER);
@@ -913,10 +1001,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         bRojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rojo.png"))); // NOI18N
         bRojo.setPreferredSize(new java.awt.Dimension(35, 35));
+        bRojo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRojoActionPerformed(evt);
+            }
+        });
         jPanel17.add(bRojo);
 
-        jNumColors.setMinimum(5);
-        jNumColors.setValue(5);
+        jNumColors.setMaximum(20);
+        jNumColors.setMinimum(2);
+        jNumColors.setValue(2);
         jNumColors.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jNumColorsStateChanged(evt);
@@ -931,7 +1025,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel17.add(jNumColors);
-        jPanel17.add(jSlider2);
+
+        sliderColorBorde.setMaximum(255);
+        sliderColorBorde.setToolTipText("");
+        sliderColorBorde.setValue(0);
+        sliderColorBorde.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliderColorBordeStateChanged(evt);
+            }
+        });
+        sliderColorBorde.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                sliderColorBordeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                sliderColorBordeFocusLost(evt);
+            }
+        });
+        jPanel17.add(sliderColorBorde);
 
         jPanel4.add(jPanel17);
 
@@ -1067,8 +1178,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             //Integer a = (int) spinnerGrosor.getValue();
             //float b = a.floatValue();
             vi.getLienzo().setGrosor_trazo(getFloat(spinnerGrosor));
+            
+            if(vi.getLienzo().getSeleccionar()){
+                vi.getLienzo().getFiguraSeleccionada().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+            }else{
+                vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+            }
 
-            vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+            
 
         }
 
@@ -2009,7 +2126,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi.getLienzo().getImage();
         
-        TintOp tintado = new TintOp(Color.red, 0.5f);
+        TintOp tintado = new TintOp(vi.getLienzo().getColor(), 0.5f);
         BufferedImage imgOut = tintado.filter(imgSource, null);
         vi.getLienzo().setImage(imgOut);
         
@@ -2050,12 +2167,139 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void jNumColorsFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jNumColorsFocusLost
         imgFuente = null;
-        jNumColors.setValue(5);
+        jNumColors.setValue(2);
     }//GEN-LAST:event_jNumColorsFocusLost
 
     private void jNumColorsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jNumColorsStateChanged
-        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) (escritorio.getSelectedFrame());
+        if (vi != null) {
+            BufferedImage img = vi.getLienzo().getImage();
+            if (imgFuente != null) {
+                try {
+
+                    int num_c = jNumColors.getValue();
+                    PosterizarOp post = new PosterizarOp(num_c);
+
+                    BufferedImage imgdest = post.filter(imgFuente, img);
+
+                    vi.getLienzo().repaint();
+                } catch (IllegalArgumentException e) {
+                    System.err.println(e.getLocalizedMessage());
+                }
+            }
+        }
     }//GEN-LAST:event_jNumColorsStateChanged
+
+    private void sliderTransparenciaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderTransparenciaStateChanged
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        
+        float nivel_t = sliderTransparencia.getValue() / 10.0f;
+
+        if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+            if (alisarToggleButton.isSelected()) {
+                vi.getLienzo().getFiguraSeleccionada().setComposicion(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, nivel_t));
+            } else {
+                vi.getLienzo().getFiguraSeleccionada().setComposicion(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, nivel_t));
+            }
+        } else {
+            if (alisarToggleButton.isSelected()) {
+                vi.getLienzo().setComposicion(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, nivel_t));
+            } else {
+                vi.getLienzo().setComposicion(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, nivel_t));
+            }
+        }
+
+        this.repaint();
+    }//GEN-LAST:event_sliderTransparenciaStateChanged
+
+    private void ComboBoxColorsTrazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxColorsTrazoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxColorsTrazoActionPerformed
+
+    private void ComboBoxColorsRellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxColorsRellenoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxColorsRellenoActionPerformed
+
+    private void bRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRojoActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        BufferedImage imgSource = vi.getLienzo().getImage();
+        
+        RojoOp rojo = new RojoOp(30);
+        BufferedImage imgOut = rojo.filter(imgSource, null);
+        vi.getLienzo().setImage(imgOut);
+        
+        vi.getLienzo().repaint();
+    }//GEN-LAST:event_bRojoActionPerformed
+
+    private void sliderColorBordeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderColorBordeStateChanged
+        VentanaInterna vi = (VentanaInterna) (escritorio.getSelectedFrame());
+        if (vi != null) {
+            BufferedImage img = vi.getLienzo().getImage();
+            if (imgFuente != null) {
+                try {
+
+                    ColorBordeOp bordeop = new ColorBordeOp(vi.getLienzo().getColor(), sliderColorBorde.getValue());
+
+                    BufferedImage imgdest = bordeop.filter(imgFuente, img);
+
+                    vi.getLienzo().repaint();
+                } catch (IllegalArgumentException e) {
+                    System.err.println(e.getLocalizedMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_sliderColorBordeStateChanged
+
+    private void sliderColorBordeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sliderColorBordeFocusGained
+        VentanaInterna vi = (VentanaInterna) (escritorio.getSelectedFrame());
+        if (vi != null) {
+            ColorModel cm = vi.getLienzo().getImage().getColorModel();
+            WritableRaster raster = vi.getLienzo().getImage().copyData(null);
+            boolean alfaPre = vi.getLienzo().getImage().isAlphaPremultiplied();
+            imgFuente = new BufferedImage(cm, raster, alfaPre, null);
+        }
+    }//GEN-LAST:event_sliderColorBordeFocusGained
+
+    private void sliderColorBordeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sliderColorBordeFocusLost
+        imgFuente = null;
+        jNumColors.setValue(0);
+    }//GEN-LAST:event_sliderColorBordeFocusLost
+
+    private void bMiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMiActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        BufferedImage imgSource = vi.getLienzo().getImage();
+        
+        MiOp miop = new MiOp(vi.getLienzo().getColor(), 30);
+        BufferedImage imgOut = miop.filter(imgSource, null);
+        vi.getLienzo().setImage(imgOut);
+        
+        vi.getLienzo().repaint();
+    }//GEN-LAST:event_bMiActionPerformed
+
+    private void bHistogramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHistogramaActionPerformed
+        VentanaInterna vi2 = (VentanaInterna) escritorio.getSelectedFrame();
+        BufferedImage imgSource = vi2.getLienzo().getImage();
+        
+        InternalForHistogram vi = new InternalForHistogram();
+        vi.setTitle("[Histograma] " + vi2.getTitle());
+        escritorio.add(vi);
+        vi.setVisible(true);
+        
+        Histogram histograma = new Histogram(imgSource);
+        
+
+        //IMAGEN
+        BufferedImage img;
+        img = new BufferedImage(histograma.getNumBins()*histograma.getNumBands(), 300, BufferedImage.TYPE_INT_RGB);
+        vi.getLienzo2D().setImage(img);
+        
+        vi.setSize(histograma.getNumBins()*histograma.getNumBands()+10, 300);
+        
+        
+        
+        vi.setHistogramaLienzo(histograma);
+        
+    }//GEN-LAST:event_bHistogramaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2087,6 +2331,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Color> ComboBoxColors;
+    private javax.swing.JComboBox<Color> ComboBoxColorsRelleno;
+    private javax.swing.JComboBox<Color> ComboBoxColorsTrazo;
     private javax.swing.JComboBox<String> ComboBoxFiltros;
     private javax.swing.JToggleButton ToggleButtonMover;
     private javax.swing.JToggleButton alisarToggleButton;
@@ -2102,7 +2348,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton bDisminuir;
     private javax.swing.JButton bEcualizador;
     private javax.swing.JButton bExtraccionBandas;
+    private javax.swing.JButton bHistograma;
     private javax.swing.JButton bIluminar;
+    private javax.swing.JButton bMi;
     private javax.swing.JButton bOscurecer;
     private javax.swing.JToggleButton bPolygon;
     private javax.swing.JButton bRojo;
@@ -2133,8 +2381,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -2142,7 +2394,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JSlider jSlider2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel labelEstado;
     private javax.swing.JMenuItem menuAbrir;
@@ -2155,8 +2406,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton rellenoToggleButton;
     private javax.swing.JSlider slider360;
     private javax.swing.JSlider sliderBrillo;
+    private javax.swing.JSlider sliderColorBorde;
     private javax.swing.JSlider sliderContraste;
     private javax.swing.JSlider sliderFiltroMedia;
+    private javax.swing.JSlider sliderTransparencia;
     private javax.swing.JSpinner spinnerGrosor;
     private javax.swing.JToggleButton transparenciaToggleButton;
     // End of variables declaration//GEN-END:variables
