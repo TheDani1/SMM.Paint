@@ -2293,7 +2293,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         img = new BufferedImage(histograma.getNumBins()*histograma.getNumBands(), 300, BufferedImage.TYPE_INT_RGB);
         vi.getLienzo2D().setImage(img);
         
-        vi.setSize(histograma.getNumBins()*histograma.getNumBands()+10, 300);
+        vi.setSize(histograma.getNumBins()*histograma.getNumBands()+10, 500);
         
         
         
