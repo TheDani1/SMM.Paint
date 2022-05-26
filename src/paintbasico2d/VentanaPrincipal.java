@@ -263,7 +263,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 botonTrazoLibre.setSelected(true);
             }
 
-            System.out.print("GROSOR: " + evt.getfigura().getGrosor_trazo());
             int a = evt.getfigura().getGrosor_trazo().intValue();
             spinnerGrosor.setValue(a);
             
@@ -405,9 +404,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Fichero"));
+        jPanel12.setAlignmentY(0.7F);
+        jPanel12.setPreferredSize(new java.awt.Dimension(135, 70));
         jPanel12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         botonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/nuevo.png"))); // NOI18N
+        botonNuevo.setToolTipText("Nuevo");
         botonNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonNuevo.setPreferredSize(new java.awt.Dimension(35, 35));
         botonNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -419,6 +421,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel12.add(botonNuevo);
 
         botonAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/abrir.png"))); // NOI18N
+        botonAbrir.setToolTipText("Abrir");
         botonAbrir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonAbrir.setPreferredSize(new java.awt.Dimension(35, 35));
         botonAbrir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -430,6 +433,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel12.add(botonAbrir);
 
         botonGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
+        botonGuardar.setToolTipText("Guardar");
         botonGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonGuardar.setPreferredSize(new java.awt.Dimension(35, 35));
         botonGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -443,10 +447,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel12);
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Figuras"));
+        jPanel13.setPreferredSize(new java.awt.Dimension(419, 50));
         jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         figuras.add(botonTrazoLibre);
         botonTrazoLibre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trazo.png"))); // NOI18N
+        botonTrazoLibre.setToolTipText("Trazo Libre");
         botonTrazoLibre.setPreferredSize(new java.awt.Dimension(35, 35));
         botonTrazoLibre.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botonTrazoLibre.addActionListener(new java.awt.event.ActionListener() {
@@ -458,6 +464,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(botonLinea);
         botonLinea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/linea.png"))); // NOI18N
+        botonLinea.setToolTipText("Línea");
         botonLinea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonLinea.setPreferredSize(new java.awt.Dimension(35, 35));
         botonLinea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -470,6 +477,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(botonRectan);
         botonRectan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rectangulo.png"))); // NOI18N
+        botonRectan.setToolTipText("Rectángulo");
         botonRectan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonRectan.setPreferredSize(new java.awt.Dimension(35, 35));
         botonRectan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -482,6 +490,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(botonElipse);
         botonElipse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/elipse.png"))); // NOI18N
+        botonElipse.setToolTipText("Elipse");
         botonElipse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonElipse.setPreferredSize(new java.awt.Dimension(35, 35));
         botonElipse.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -494,6 +503,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(botonCurva);
         botonCurva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/curva.png"))); // NOI18N
+        botonCurva.setToolTipText("Curva");
         botonCurva.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonCurva.setPreferredSize(new java.awt.Dimension(35, 35));
         botonCurva.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -506,6 +516,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(bRoundRectangle);
         bRoundRectangle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/7968882_rectangle_adobe illustrator tool_rectangle tool_icon.png"))); // NOI18N
+        bRoundRectangle.setToolTipText("Rectángulo Redondo");
         bRoundRectangle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bRoundRectangle.setPreferredSize(new java.awt.Dimension(35, 35));
         bRoundRectangle.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -518,6 +529,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(bArc2D);
         bArc2D.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/7832925_arc_design tools_tool_tools_icon.png"))); // NOI18N
+        bArc2D.setToolTipText("Arco");
         bArc2D.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bArc2D.setPreferredSize(new java.awt.Dimension(35, 35));
         bArc2D.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -530,6 +542,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(bCubicCurve);
         bCubicCurve.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9043763_3d_curve_auto_colon_icon.png"))); // NOI18N
+        bCubicCurve.setToolTipText("Curva Cúbica");
         bCubicCurve.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bCubicCurve.setPreferredSize(new java.awt.Dimension(35, 35));
         bCubicCurve.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -542,6 +555,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(bPolygon);
         bPolygon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9054997_bx_polygon_icon.png"))); // NOI18N
+        bPolygon.setToolTipText("Polígono");
         bPolygon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bPolygon.setPreferredSize(new java.awt.Dimension(35, 35));
         bPolygon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -559,6 +573,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         figuras.add(bArea);
         bArea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/216130_area_chart_icon.png"))); // NOI18N
+        bArea.setToolTipText("Área");
         bArea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         bArea.setPreferredSize(new java.awt.Dimension(35, 35));
         bArea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -572,7 +587,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel13);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Atributos"));
+        jPanel15.setPreferredSize(new java.awt.Dimension(555, 50));
 
+        ComboBoxColors.setToolTipText("Color Figura");
         ComboBoxColors.setPreferredSize(new java.awt.Dimension(35, 35));
         ComboBoxColors.setRenderer(new ColorCellRender());
         ComboBoxColors.addActionListener(new java.awt.event.ActionListener() {
@@ -583,6 +600,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel15.add(ComboBoxColors);
 
         alisarToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/alisar.png"))); // NOI18N
+        alisarToggleButton.setToolTipText("Alisado");
         alisarToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         alisarToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
         alisarToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -595,6 +613,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        ComboBoxColorsRelleno.setToolTipText("Color Relleno");
         ComboBoxColorsRelleno.setPreferredSize(new java.awt.Dimension(35, 35));
         ComboBoxColorsRelleno.setRenderer(new ColorCellRender());
         ComboBoxColorsRelleno.addActionListener(new java.awt.event.ActionListener() {
@@ -605,6 +624,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel16.add(ComboBoxColorsRelleno);
 
         rellenoToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rellenar.png"))); // NOI18N
+        rellenoToggleButton.setToolTipText("Relleno");
         rellenoToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         rellenoToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
         rellenoToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -620,6 +640,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         sliderTransparencia.setMaximum(10);
+        sliderTransparencia.setToolTipText("Deslizador Transparencia");
         sliderTransparencia.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 sliderTransparenciaStateChanged(evt);
@@ -628,6 +649,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel19.add(sliderTransparencia);
 
         transparenciaToggleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/transparencia.png"))); // NOI18N
+        transparenciaToggleButton.setToolTipText("Transparencia");
         transparenciaToggleButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         transparenciaToggleButton.setPreferredSize(new java.awt.Dimension(35, 35));
         transparenciaToggleButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -642,6 +664,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        spinnerGrosor.setToolTipText("Grosor Trazo");
         spinnerGrosor.setPreferredSize(new java.awt.Dimension(50, 25));
         spinnerGrosor.setValue(5.0f);
         spinnerGrosor.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -651,6 +674,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jPanel18.add(spinnerGrosor);
 
+        ComboBoxColorsTrazo.setToolTipText("Color Trazo");
         ComboBoxColorsTrazo.setPreferredSize(new java.awt.Dimension(35, 35));
         ComboBoxColorsTrazo.setRenderer(new ColorCellRender());
         ComboBoxColorsTrazo.addActionListener(new java.awt.event.ActionListener() {
@@ -665,9 +689,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel15);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Tools"));
+        jPanel14.setPreferredSize(new java.awt.Dimension(99, 50));
         jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         ToggleButtonMover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/seleccion.png"))); // NOI18N
+        ToggleButtonMover.setToolTipText("Mover");
         ToggleButtonMover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ToggleButtonMover.setPreferredSize(new java.awt.Dimension(35, 35));
         ToggleButtonMover.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -679,6 +705,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel14.add(ToggleButtonMover);
 
         botonSeleccionador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/9111124_select_icon (1).png"))); // NOI18N
+        botonSeleccionador.setToolTipText("Selección");
         botonSeleccionador.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonSeleccionador.setPreferredSize(new java.awt.Dimension(35, 35));
         botonSeleccionador.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -693,8 +720,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Mi Operación"));
         jPanel20.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel20.setPreferredSize(new java.awt.Dimension(110, 50));
 
         bMi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imágenes ejemplo-20220512/image133.png"))); // NOI18N
+        bMi.setToolTipText("Operación Propia");
         bMi.setPreferredSize(new java.awt.Dimension(35, 35));
         bMi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -704,6 +733,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel20.add(bMi);
 
         bHistograma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/image63.png"))); // NOI18N
+        bHistograma.setToolTipText("Histograma");
         bHistograma.setPreferredSize(new java.awt.Dimension(35, 35));
         bHistograma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -728,7 +758,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 259, Short.MAX_VALUE)
+            .addGap(0, 270, Short.MAX_VALUE)
         );
 
         jPanel2.add(escritorio, java.awt.BorderLayout.CENTER);
@@ -744,6 +774,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         sliderBrillo.setMaximum(255);
         sliderBrillo.setMinimum(-255);
+        sliderBrillo.setToolTipText("Deslizador Brillo");
         sliderBrillo.setValue(0);
         sliderBrillo.setPreferredSize(new java.awt.Dimension(200, 35));
         sliderBrillo.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -762,6 +793,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel8.add(sliderBrillo);
 
         sliderContraste.setMaximum(20);
+        sliderContraste.setToolTipText("Deslizador Contraste");
         sliderContraste.setValue(10);
         sliderContraste.setPreferredSize(new java.awt.Dimension(200, 35));
         sliderContraste.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -786,6 +818,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         sliderFiltroMedia.setMaximum(31);
         sliderFiltroMedia.setMinimum(1);
+        sliderFiltroMedia.setToolTipText("Deslizador Filtro");
         sliderFiltroMedia.setValue(0);
         sliderFiltroMedia.setPreferredSize(new java.awt.Dimension(200, 35));
         sliderFiltroMedia.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -809,6 +842,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel7.setLayout(new java.awt.BorderLayout());
 
         ComboBoxFiltros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Emborronamiento media", "Emborronamiento binomial", "Enfoque", "Relieve", "Detector de fronteras laplaciano", "Emborronamiento media5x5", "Emborronamiento media7x7" }));
+        ComboBoxFiltros.setToolTipText("Filtros");
         ComboBoxFiltros.setPreferredSize(new java.awt.Dimension(247, 35));
         ComboBoxFiltros.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -830,6 +864,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Transformaciones"));
 
         botonContraste.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/contraste.png"))); // NOI18N
+        botonContraste.setToolTipText("Contraste");
         botonContraste.setPreferredSize(new java.awt.Dimension(35, 35));
         botonContraste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -839,6 +874,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel11.add(botonContraste);
 
         bIluminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/iluminar.png"))); // NOI18N
+        bIluminar.setToolTipText("Iluminar");
         bIluminar.setPreferredSize(new java.awt.Dimension(35, 35));
         bIluminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -848,6 +884,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel11.add(bIluminar);
 
         bOscurecer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/oscurecer.png"))); // NOI18N
+        bOscurecer.setToolTipText("Oscurecer");
         bOscurecer.setPreferredSize(new java.awt.Dimension(35, 35));
         bOscurecer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -857,6 +894,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel11.add(bOscurecer);
 
         bCuadratica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cuadratica.png"))); // NOI18N
+        bCuadratica.setToolTipText("Función Cuadrática");
         bCuadratica.setPreferredSize(new java.awt.Dimension(35, 35));
         bCuadratica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -866,6 +904,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel11.add(bCuadratica);
 
         bTrapezoide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trapezoid.png"))); // NOI18N
+        bTrapezoide.setToolTipText("Función Trapezoidal");
         bTrapezoide.setPreferredSize(new java.awt.Dimension(35, 35));
         bTrapezoide.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -882,6 +921,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         slider360.setMaximum(360);
         slider360.setPaintTicks(true);
         slider360.setSnapToTicks(true);
+        slider360.setToolTipText("Slider Rotación");
         slider360.setValue(0);
         slider360.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -899,6 +939,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel10.add(slider360);
 
         b90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rotacion90.png"))); // NOI18N
+        b90.setToolTipText("Rotación 90º");
         b90.setPreferredSize(new java.awt.Dimension(35, 35));
         b90.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -908,6 +949,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel10.add(b90);
 
         b180.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rotacion180.png"))); // NOI18N
+        b180.setToolTipText("Rotación 180º");
         b180.setPreferredSize(new java.awt.Dimension(35, 35));
         b180.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -917,6 +959,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel10.add(b180);
 
         b270.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rotacion270.png"))); // NOI18N
+        b270.setToolTipText("Rotación 270º");
         b270.setPreferredSize(new java.awt.Dimension(35, 35));
         b270.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -926,6 +969,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel10.add(b270);
 
         bAumentar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/aumentar.png"))); // NOI18N
+        bAumentar.setToolTipText("Aumentar");
         bAumentar.setPreferredSize(new java.awt.Dimension(35, 35));
         bAumentar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -935,6 +979,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel10.add(bAumentar);
 
         bDisminuir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/disminuir.png"))); // NOI18N
+        bDisminuir.setToolTipText("Disminuir");
         bDisminuir.setPreferredSize(new java.awt.Dimension(35, 35));
         bDisminuir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -948,6 +993,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Color"));
 
         bExtraccionBandas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/bandas.png"))); // NOI18N
+        bExtraccionBandas.setToolTipText("Extracción de Bandas");
         bExtraccionBandas.setPreferredSize(new java.awt.Dimension(35, 35));
         bExtraccionBandas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -957,6 +1003,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel5.add(bExtraccionBandas);
 
         comboBoxEspaciosColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "RGB", "YCC", "GREY", "Grey++" }));
+        comboBoxEspaciosColor.setToolTipText("Elección Espacio Color");
         comboBoxEspaciosColor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxEspaciosColorActionPerformed(evt);
@@ -969,10 +1016,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel17.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Operadores"));
 
         bCombinacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/combinar.png"))); // NOI18N
+        bCombinacion.setToolTipText("Combinación");
         bCombinacion.setPreferredSize(new java.awt.Dimension(35, 35));
         jPanel17.add(bCombinacion);
 
         bTintar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/tintar.png"))); // NOI18N
+        bTintar.setToolTipText("Tintado");
         bTintar.setPreferredSize(new java.awt.Dimension(35, 35));
         bTintar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -982,6 +1031,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel17.add(bTintar);
 
         bSepia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/sepia.png"))); // NOI18N
+        bSepia.setToolTipText("Sepia");
         bSepia.setPreferredSize(new java.awt.Dimension(35, 35));
         bSepia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -991,6 +1041,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel17.add(bSepia);
 
         bEcualizador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ecualizar.png"))); // NOI18N
+        bEcualizador.setToolTipText("Ecualizar");
         bEcualizador.setPreferredSize(new java.awt.Dimension(35, 35));
         bEcualizador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1000,6 +1051,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel17.add(bEcualizador);
 
         bRojo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/rojo.png"))); // NOI18N
+        bRojo.setToolTipText("Aumento Rojo");
         bRojo.setPreferredSize(new java.awt.Dimension(35, 35));
         bRojo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1010,6 +1062,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jNumColors.setMaximum(20);
         jNumColors.setMinimum(2);
+        jNumColors.setToolTipText("Deslizador Número de Colores");
         jNumColors.setValue(2);
         jNumColors.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1027,7 +1080,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel17.add(jNumColors);
 
         sliderColorBorde.setMaximum(255);
-        sliderColorBorde.setToolTipText("");
+        sliderColorBorde.setToolTipText("Deslizador Borde Color");
         sliderColorBorde.setValue(0);
         sliderColorBorde.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -1174,18 +1227,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void spinnerGrosorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerGrosorStateChanged
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         if (!(vi == null)) {
-
-            //Integer a = (int) spinnerGrosor.getValue();
-            //float b = a.floatValue();
-            vi.getLienzo().setGrosor_trazo(getFloat(spinnerGrosor));
             
-            if(vi.getLienzo().getSeleccionar()){
+            if(vi.getLienzo().getS_selected() != null){
+                vi.getLienzo().getFiguraSeleccionada().setStroke(new BasicStroke(vi.getLienzo().getFiguraSeleccionada().getGrosor_trazo()));
+                vi.getLienzo().setGrosor_trazo(getFloat(spinnerGrosor));
+                
                 vi.getLienzo().getFiguraSeleccionada().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+                vi.getLienzo().getFiguraSeleccionada().setGrosor_trazo(getFloat(spinnerGrosor));
+                
             }else{
+                
+                vi.getLienzo().setGrosor_trazo(getFloat(spinnerGrosor));
                 vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+                
             }
-
-            
 
         }
 
@@ -1199,8 +1254,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             try {
                 File f = chooser.getSelectedFile();
                 BufferedImage img = ImageIO.read(f);
-                VentanaInterna vi = new VentanaInterna();
-                vi.getLienzo().setImage(img);
+                VentanaInterna vi = new VentanaInterna(img);
+                
                 this.escritorio.add(vi);
                 vi.setTitle(f.getName());
                 vi.setVisible(true);
@@ -1514,8 +1569,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             try {
                 File f = dlg.getSelectedFile();
                 BufferedImage img = ImageIO.read(f);
-                VentanaInterna vi = new VentanaInterna();
-                vi.getLienzo().setImage(img);
+                VentanaInterna vi = new VentanaInterna(img);
+                //vi.getLienzo().setImage(img);
                 this.escritorio.add(vi);
                 vi.setTitle(f.getName());
                 vi.setVisible(true);
@@ -2001,6 +2056,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             vi.getLienzo().setGrosor_trazo(5.0f);
             vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
             vi.getLienzo().setColor(Color.BLACK);
+            ComboBoxColors.setSelectedIndex(0);
+            botonRectan.setSelected(true);
+            spinnerGrosor.setValue(5);
         }
     }//GEN-LAST:event_botonSeleccionadorActionPerformed
 
@@ -2078,6 +2136,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vi.getLienzo().setImage(img);
         vi.setTitle("[1]");
         vi.setVisible(true);*/
+        
         // 2) Crear el objeto manejador (hacer el "new" de la clase anterior)
         vi.addInternalFrameListener(new ManejadorVentanaInterna());
         vi.getLienzo().addLienzoListener(new MiManejadorLienzo());
@@ -2280,24 +2339,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VentanaInterna vi2 = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi2.getLienzo().getImage();
         
-        InternalForHistogram vi = new InternalForHistogram();
+        /*InternalForHistogram vi = new InternalForHistogram();
         vi.setTitle("[Histograma] " + vi2.getTitle());
         escritorio.add(vi);
-        vi.setVisible(true);
+        vi.setVisible(true);*/
+        
+        VentanaInterna vi = new VentanaInterna();
+        vi.setTitle("[Histograma] " + vi2.getTitle());
         
         Histogram histograma = new Histogram(imgSource);
+        vi.getLienzo().setHistogramaLienzo(histograma);
+        vi.setSize(histograma.getNumBins()*histograma.getNumBands()+10, 300);
         
-
-        //IMAGEN
-        BufferedImage img;
-        img = new BufferedImage(histograma.getNumBins()*histograma.getNumBands(), 300, BufferedImage.TYPE_INT_RGB);
-        vi.getLienzo2D().setImage(img);
-        
-        vi.setSize(histograma.getNumBins()*histograma.getNumBands()+10, 500);
-        
-        
-        
-        vi.setHistogramaLienzo(histograma);
+        escritorio.add(vi);
+        vi.setVisible(true);
         
     }//GEN-LAST:event_bHistogramaActionPerformed
 
