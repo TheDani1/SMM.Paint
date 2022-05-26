@@ -16,6 +16,8 @@ import java.awt.Stroke;
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.ByteLookupTable;
@@ -30,7 +32,10 @@ import java.awt.image.LookupTable;
 import java.awt.image.RescaleOp;
 import java.awt.image.WritableRaster;
 import java.io.File;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -38,9 +43,15 @@ import javax.swing.JSpinner;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import sm.dgs.graficos.Arco2D;
+import sm.dgs.graficos.Curva2D;
+import sm.dgs.graficos.CurvaCubica;
 import sm.dgs.graficos.Elipse2D;
 import sm.dgs.graficos.Linea2D;
+import sm.dgs.graficos.MiFigura;
+import sm.dgs.graficos.Poligono;
 import sm.dgs.graficos.Rectangulo2D;
+import sm.dgs.graficos.RoundRectangulo2D;
 import sm.dgs.graficos.TrazoLibre2D;
 import sm.dgs.imagen.ColorBordeOp;
 import sm.dgs.imagen.MiOp;
@@ -213,7 +224,48 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public class MiManejadorLienzo extends LienzoAdapter {
 
         public void shapeAdded(LienzoEvent evt) {
-            labelEstado.setText("Figura " + " x " + "añadida");
+
+            VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+
+            labelEstado.setText("[EVT] Figura " + " x " + "añadida");
+            
+            // TODO: SOBRECARGAR MÉTODO STRING EN CADA FIGURA
+            
+            ArrayList<MiFigura> listaFiguras = vi.getLienzo().getvShape();
+
+            DefaultComboBoxModel modelo= new DefaultComboBoxModel();
+            
+            for (int i = 0; i < listaFiguras.size(); i++) {
+                
+                Shape figura = listaFiguras.get(i).getTipoFigura();
+               
+                if(figura instanceof Rectangulo2D){
+                    modelo.addElement(modelo.getSize()+1 +". Rectángulo2D");
+                }else if (figura instanceof TrazoLibre2D){
+                    modelo.addElement(modelo.getSize()+1 +". TrazoLibre2D");
+                }else if(figura instanceof Linea2D){
+                    modelo.addElement(modelo.getSize()+1 +". Linea2D");
+                }else if(figura instanceof Elipse2D){
+                    modelo.addElement(modelo.getSize()+1 +". Elipse2D");
+                }else if(figura instanceof Curva2D){
+                    modelo.addElement(modelo.getSize()+1 +". Curva2D");
+                }else if(figura instanceof RoundRectangulo2D){
+                    modelo.addElement(modelo.getSize()+1 +". Rectángulo Redondo");
+                }else if(figura instanceof Arco2D){
+                    modelo.addElement(modelo.getSize()+1 +". Arco2D");
+                }else if(figura instanceof CurvaCubica){
+                    modelo.addElement(modelo.getSize()+1 +". CurvaCubica");
+                }else if(figura instanceof Poligono){
+                    modelo.addElement(modelo.getSize()+1 +". Poligono");
+                }else if(figura instanceof Area){
+                    modelo.addElement(modelo.getSize()+1 +". Area");
+                }else{
+                    modelo.addElement(modelo.getSize()+1 +". Figura");
+                }
+                
+            }
+
+            comboBoxObjetos.setModel(modelo);
         }
 
         public void propertyChange(LienzoEvent evt) {
@@ -265,11 +317,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
             int a = evt.getfigura().getGrosor_trazo().intValue();
             spinnerGrosor.setValue(a);
-            
-            Composite composicion = evt.getfigura().getComposicion();
-            
-            //sliderTransparencia.setValue();
 
+            Composite composicion = evt.getfigura().getComposicion();
+
+            //sliderTransparencia.setValue();
         }
 
     }
@@ -328,6 +379,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         bCubicCurve = new javax.swing.JToggleButton();
         bPolygon = new javax.swing.JToggleButton();
         bArea = new javax.swing.JToggleButton();
+        comboBoxObjetos = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         Color colores[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
         ComboBoxColors = new javax.swing.JComboBox<>(colores);
@@ -346,6 +398,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel14 = new javax.swing.JPanel();
         ToggleButtonMover = new javax.swing.JToggleButton();
         botonSeleccionador = new javax.swing.JToggleButton();
+        bVolcado = new javax.swing.JToggleButton();
         jPanel20 = new javax.swing.JPanel();
         bMi = new javax.swing.JButton();
         bHistograma = new javax.swing.JButton();
@@ -392,9 +445,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuAbrir = new javax.swing.JMenuItem();
         menuGuardar = new javax.swing.JMenuItem();
         menuEdicion = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        menuImagen = new javax.swing.JMenu();
         menuRescaleOp = new javax.swing.JMenuItem();
         menuConvolveOp = new javax.swing.JMenuItem();
+        menuAyuda = new javax.swing.JMenu();
+        itemAcercade = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -447,7 +502,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel12);
 
         jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Figuras"));
-        jPanel13.setPreferredSize(new java.awt.Dimension(419, 50));
+        jPanel13.setPreferredSize(new java.awt.Dimension(600, 50));
+        jPanel13.setRequestFocusEnabled(false);
         jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         figuras.add(botonTrazoLibre);
@@ -584,6 +640,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jPanel13.add(bArea);
 
+        comboBoxObjetos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguna figura" }));
+        comboBoxObjetos.setPreferredSize(new java.awt.Dimension(170, 25));
+        comboBoxObjetos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxObjetosActionPerformed(evt);
+            }
+        });
+        jPanel13.add(comboBoxObjetos);
+
         jToolBar1.add(jPanel13);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Atributos"));
@@ -689,8 +754,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel15);
 
         jPanel14.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Tools"));
-        jPanel14.setPreferredSize(new java.awt.Dimension(99, 50));
-        jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
+        jPanel14.setPreferredSize(new java.awt.Dimension(160, 50));
 
         ToggleButtonMover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/seleccion.png"))); // NOI18N
         ToggleButtonMover.setToolTipText("Mover");
@@ -715,6 +779,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel14.add(botonSeleccionador);
+
+        bVolcado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/image77.png"))); // NOI18N
+        bVolcado.setPreferredSize(new java.awt.Dimension(35, 35));
+        bVolcado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVolcadoActionPerformed(evt);
+            }
+        });
+        jPanel14.add(bVolcado);
 
         jToolBar1.add(jPanel14);
 
@@ -1150,7 +1223,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuEdicion.setText("Edición");
         jMenuBar1.add(menuEdicion);
 
-        jMenu1.setText("Imagen");
+        menuImagen.setText("Imagen");
 
         menuRescaleOp.setText("Reescalar imagen");
         menuRescaleOp.addActionListener(new java.awt.event.ActionListener() {
@@ -1158,7 +1231,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 menuRescaleOpActionPerformed(evt);
             }
         });
-        jMenu1.add(menuRescaleOp);
+        menuImagen.add(menuRescaleOp);
 
         menuConvolveOp.setText("ConvolveOp");
         menuConvolveOp.addActionListener(new java.awt.event.ActionListener() {
@@ -1166,9 +1239,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 menuConvolveOpActionPerformed(evt);
             }
         });
-        jMenu1.add(menuConvolveOp);
+        menuImagen.add(menuConvolveOp);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuImagen);
+
+        menuAyuda.setText("Ayuda");
+
+        itemAcercade.setText("Acerca de");
+        itemAcercade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAcercadeActionPerformed(evt);
+            }
+        });
+        menuAyuda.add(itemAcercade);
+
+        jMenuBar1.add(menuAyuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -1227,19 +1312,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void spinnerGrosorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerGrosorStateChanged
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         if (!(vi == null)) {
-            
-            if(vi.getLienzo().getS_selected() != null){
+
+            if (vi.getLienzo().getS_selected() != null) {
                 vi.getLienzo().getFiguraSeleccionada().setStroke(new BasicStroke(vi.getLienzo().getFiguraSeleccionada().getGrosor_trazo()));
                 vi.getLienzo().setGrosor_trazo(getFloat(spinnerGrosor));
-                
+
                 vi.getLienzo().getFiguraSeleccionada().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
                 vi.getLienzo().getFiguraSeleccionada().setGrosor_trazo(getFloat(spinnerGrosor));
-                
-            }else{
-                
+
+            } else {
+
                 vi.getLienzo().setGrosor_trazo(getFloat(spinnerGrosor));
                 vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
-                
+
             }
 
         }
@@ -1255,7 +1340,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 File f = chooser.getSelectedFile();
                 BufferedImage img = ImageIO.read(f);
                 VentanaInterna vi = new VentanaInterna(img);
-                
+
                 this.escritorio.add(vi);
                 vi.setTitle(f.getName());
                 vi.setVisible(true);
@@ -1335,7 +1420,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void sliderBrilloFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sliderBrilloFocusLost
         imgFuente = null;
-        
+
     }//GEN-LAST:event_sliderBrilloFocusLost
 
     private void sliderBrilloStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderBrilloStateChanged
@@ -1614,7 +1699,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_botonGuardarActionPerformed
-
+    
     private void ComboBoxColorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxColorsActionPerformed
 
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
@@ -2112,7 +2197,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void bExtraccionBandasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExtraccionBandasActionPerformed
 
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
-        
+
         BufferedImage imgS = vi.getLienzo().getImage();
         WritableRaster rasterS = imgS.getRaster();
 
@@ -2136,7 +2221,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         vi.getLienzo().setImage(img);
         vi.setTitle("[1]");
         vi.setVisible(true);*/
-        
         // 2) Crear el objeto manejador (hacer el "new" de la clase anterior)
         vi.addInternalFrameListener(new ManejadorVentanaInterna());
         vi.getLienzo().addLienzoListener(new MiManejadorLienzo());
@@ -2184,33 +2268,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void bTintarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTintarActionPerformed
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi.getLienzo().getImage();
-        
+
         TintOp tintado = new TintOp(vi.getLienzo().getColor(), 0.5f);
         BufferedImage imgOut = tintado.filter(imgSource, null);
         vi.getLienzo().setImage(imgOut);
-        
+
         vi.getLienzo().repaint();
     }//GEN-LAST:event_bTintarActionPerformed
 
     private void bSepiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSepiaActionPerformed
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi.getLienzo().getImage();
-        
+
         SepiaOp sepia = new SepiaOp();
         BufferedImage imgOut = sepia.filter(imgSource, null);
         vi.getLienzo().setImage(imgOut);
-        
+
         vi.getLienzo().repaint();
     }//GEN-LAST:event_bSepiaActionPerformed
 
     private void bEcualizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEcualizadorActionPerformed
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi.getLienzo().getImage();
-        
+
         EqualizationOp ecualizacion = new EqualizationOp();
         BufferedImage imgOut = ecualizacion.filter(imgSource, null);
         vi.getLienzo().setImage(imgOut);
-        
+
         vi.getLienzo().repaint();
     }//GEN-LAST:event_bEcualizadorActionPerformed
 
@@ -2251,7 +2335,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void sliderTransparenciaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliderTransparenciaStateChanged
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
-        
+
         float nivel_t = sliderTransparencia.getValue() / 10.0f;
 
         if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
@@ -2282,11 +2366,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void bRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRojoActionPerformed
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi.getLienzo().getImage();
-        
+
         RojoOp rojo = new RojoOp(30);
         BufferedImage imgOut = rojo.filter(imgSource, null);
         vi.getLienzo().setImage(imgOut);
-        
+
         vi.getLienzo().repaint();
     }//GEN-LAST:event_bRojoActionPerformed
 
@@ -2327,34 +2411,73 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void bMiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMiActionPerformed
         VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi.getLienzo().getImage();
-        
+
         MiOp miop = new MiOp(vi.getLienzo().getColor(), 30);
         BufferedImage imgOut = miop.filter(imgSource, null);
         vi.getLienzo().setImage(imgOut);
-        
+
         vi.getLienzo().repaint();
     }//GEN-LAST:event_bMiActionPerformed
 
     private void bHistogramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bHistogramaActionPerformed
         VentanaInterna vi2 = (VentanaInterna) escritorio.getSelectedFrame();
         BufferedImage imgSource = vi2.getLienzo().getImage();
-        
+
         /*InternalForHistogram vi = new InternalForHistogram();
         vi.setTitle("[Histograma] " + vi2.getTitle());
         escritorio.add(vi);
         vi.setVisible(true);*/
-        
         VentanaInterna vi = new VentanaInterna();
         vi.setTitle("[Histograma] " + vi2.getTitle());
-        
+
         Histogram histograma = new Histogram(imgSource);
         vi.getLienzo().setHistogramaLienzo(histograma);
-        vi.setSize(histograma.getNumBins()*histograma.getNumBands()+10, 300);
-        
+        vi.setSize(histograma.getNumBins() * histograma.getNumBands() + 10, 300);
+
         escritorio.add(vi);
         vi.setVisible(true);
-        
+
     }//GEN-LAST:event_bHistogramaActionPerformed
+
+    private void itemAcercadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAcercadeActionPerformed
+        AcercaDeFrame acercade = new AcercaDeFrame();
+        acercade.setTitle("Acerca de");
+        acercade.setVisible(true);
+    }//GEN-LAST:event_itemAcercadeActionPerformed
+
+    private void comboBoxObjetosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxObjetosActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+         
+        if(vi.getLienzo().getSeleccionar()){
+            System.out.print(comboBoxObjetos.getSelectedIndex());
+            vi.getLienzo().seleccionarFigura(vi.getLienzo().getvShape().get(comboBoxObjetos.getSelectedIndex()));
+        }
+    }//GEN-LAST:event_comboBoxObjetosActionPerformed
+
+    private void bVolcadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVolcadoActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        
+        if (bVolcado.isSelected()) {
+            vi.getLienzo().setVolcar(true);
+            
+            if(!vi.getLienzo().getvShape().isEmpty()){
+                
+                vi.getLienzo().volcarVector();
+                
+                DefaultComboBoxModel modelo= new DefaultComboBoxModel();
+                modelo.addElement("Ninguna figura");
+                comboBoxObjetos.setModel(modelo);
+                
+                escritorio.repaint();
+            }
+            
+           
+        } else {
+            vi.getLienzo().setVolcar(false);
+        }
+        
+        vi.getLienzo().repaint();
+    }//GEN-LAST:event_bVolcadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2413,6 +2536,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton bSepia;
     private javax.swing.JButton bTintar;
     private javax.swing.JToggleButton bTrapezoide;
+    private javax.swing.JToggleButton bVolcado;
     private javax.swing.JButton botonAbrir;
     private javax.swing.JButton botonContraste;
     private javax.swing.JToggleButton botonCurva;
@@ -2424,9 +2548,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton botonSeleccionador;
     private javax.swing.JToggleButton botonTrazoLibre;
     private javax.swing.JComboBox<String> comboBoxEspaciosColor;
+    private javax.swing.JComboBox<String> comboBoxObjetos;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.ButtonGroup figuras;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem itemAcercade;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSlider jNumColors;
     private javax.swing.JPanel jPanel1;
@@ -2453,9 +2578,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel labelEstado;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenu menuArchivo;
+    private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenuItem menuConvolveOp;
     private javax.swing.JMenu menuEdicion;
     private javax.swing.JMenuItem menuGuardar;
+    private javax.swing.JMenu menuImagen;
     private javax.swing.JMenuItem menuNuevo;
     private javax.swing.JMenuItem menuRescaleOp;
     private javax.swing.JToggleButton rellenoToggleButton;
