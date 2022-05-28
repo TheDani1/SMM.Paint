@@ -806,6 +806,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel18.add(ComboBoxColorsTrazo);
 
         comboBoxDiscontinuidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "─────", "─ ─ ─ ─  " }));
+        comboBoxDiscontinuidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxDiscontinuidadActionPerformed(evt);
+            }
+        });
         jPanel18.add(comboBoxDiscontinuidad);
 
         jPanel15.add(jPanel18);
@@ -1382,7 +1387,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else {
 
                 vi.getLienzo().setGrosor_trazo(getFloat(spinnerGrosor));
-                vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+                if(comboBoxDiscontinuidad.getSelectedIndex() == 1){
+                    vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo(),
+                                                            BasicStroke.CAP_BUTT,
+                                                            BasicStroke.JOIN_MITER,
+                                                            10.0f, vi.getLienzo().getPatronDiscontinuidad(), 0.0f));
+                }else{
+                    vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+                }
+                
 
             }
 
@@ -2683,6 +2696,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         vi.getLienzo().repaint();
     }//GEN-LAST:event_bVolcadoActionPerformed
+
+    private void comboBoxDiscontinuidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxDiscontinuidadActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        
+        if(comboBoxDiscontinuidad.getSelectedIndex() == 1){
+            vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo(),
+                                                     BasicStroke.CAP_BUTT,
+                                                     BasicStroke.JOIN_MITER,
+                                                     10.0f, vi.getLienzo().getPatronDiscontinuidad(), 0.0f));
+        }else{
+            vi.getLienzo().setStroke(new BasicStroke(vi.getLienzo().getGrosor_trazo()));
+        }
+        
+    }//GEN-LAST:event_comboBoxDiscontinuidadActionPerformed
 
     /**
      * @param args the command line arguments
