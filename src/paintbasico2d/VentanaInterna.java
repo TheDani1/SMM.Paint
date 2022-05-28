@@ -4,6 +4,7 @@
  */
 package paintbasico2d;
 
+import java.awt.image.BufferedImage;
 import sm.dgs.iu.Lienzo2D;
 
 /**
@@ -12,10 +13,18 @@ import sm.dgs.iu.Lienzo2D;
  */
 public class VentanaInterna extends javax.swing.JInternalFrame {
 
+    BufferedImage imgI;
+    
     /**
      * Creates new form VentanaInterna
      */
     public VentanaInterna() {
+        initComponents();
+    }
+    
+    public VentanaInterna(BufferedImage imgI){
+        
+        this.imgI = imgI;
         initComponents();
     }
     
@@ -33,7 +42,7 @@ public class VentanaInterna extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        lienzo2D1 = new sm.dgs.iu.Lienzo2D();
+        lienzo2D1 = new sm.dgs.iu.Lienzo2D(imgI);
 
         setClosable(true);
         setIconifiable(true);

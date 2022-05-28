@@ -35,6 +35,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Container class="sm.dgs.iu.Lienzo2D" name="lienzo2D1">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new sm.dgs.iu.Lienzo2D(imgI)"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">
