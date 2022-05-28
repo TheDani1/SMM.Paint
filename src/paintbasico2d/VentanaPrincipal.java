@@ -273,13 +273,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             labelEstado.setText("Figura" + " x " + "seleccionada" + "Transparencia: " + evt.getfigura().getTransparencia() + " Alisar: " + evt.getfigura().getAntialiasing());
 
             Color lcolor = evt.getfigura().getColor();
+            Color color_str = evt.getfigura().getColor_trazo();
+            Color color_fill = evt.getfigura().getColor_relleno();
+            
             Shape sfigura = evt.getfigura().getTipoFigura();
 
             rellenoToggleButton.setSelected(evt.getfigura().getRelleno());
             transparenciaToggleButton.setSelected(evt.getfigura().getTransparencia());
             alisarToggleButton.setSelected(evt.getfigura().getAntialiasing());
 
-            if (lcolor == Color.BLACK) {
+            /*if (lcolor == Color.BLACK) {
 
                 ComboBoxColors.setSelectedIndex(0);
 
@@ -302,6 +305,58 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else if (lcolor == Color.GREEN) {
 
                 ComboBoxColors.setSelectedIndex(5);
+
+            }*/
+            
+            if (color_str == Color.BLACK) {
+
+                ComboBoxColorsTrazo.setSelectedIndex(0);
+
+            } else if (color_str == Color.RED) {
+
+                ComboBoxColorsTrazo.setSelectedIndex(1);
+
+            } else if (color_str == Color.BLUE) {
+
+                ComboBoxColorsTrazo.setSelectedIndex(2);
+
+            } else if (color_str == Color.WHITE) {
+
+                ComboBoxColorsTrazo.setSelectedIndex(3);
+
+            } else if (color_str == Color.YELLOW) {
+
+                ComboBoxColorsTrazo.setSelectedIndex(4);
+
+            } else if (color_str == Color.GREEN) {
+
+                ComboBoxColorsTrazo.setSelectedIndex(5);
+
+            }
+            
+            if (color_fill == Color.BLACK) {
+
+                ComboBoxColorsRelleno.setSelectedIndex(0);
+
+            } else if (color_fill == Color.RED) {
+
+                ComboBoxColorsRelleno.setSelectedIndex(1);
+
+            } else if (color_fill == Color.BLUE) {
+
+                ComboBoxColorsRelleno.setSelectedIndex(2);
+
+            } else if (color_fill == Color.WHITE) {
+
+                ComboBoxColorsRelleno.setSelectedIndex(3);
+
+            } else if (color_fill == Color.YELLOW) {
+
+                ComboBoxColorsRelleno.setSelectedIndex(4);
+
+            } else if (color_fill == Color.GREEN) {
+
+                ComboBoxColorsRelleno.setSelectedIndex(5);
 
             }
 
@@ -395,6 +450,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         spinnerGrosor = new javax.swing.JSpinner();
         Color coloresTrazo[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
         ComboBoxColorsTrazo = new javax.swing.JComboBox<>(coloresTrazo);
+        comboBoxDiscontinuidad = new javax.swing.JComboBox<>();
         jPanel14 = new javax.swing.JPanel();
         ToggleButtonMover = new javax.swing.JToggleButton();
         botonSeleccionador = new javax.swing.JToggleButton();
@@ -652,7 +708,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel13);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Atributos"));
-        jPanel15.setPreferredSize(new java.awt.Dimension(555, 50));
+        jPanel15.setPreferredSize(new java.awt.Dimension(650, 50));
 
         ComboBoxColors.setToolTipText("Color Figura");
         ComboBoxColors.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -748,6 +804,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel18.add(ComboBoxColorsTrazo);
+
+        comboBoxDiscontinuidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "─────", "─ ─ ─ ─  " }));
+        jPanel18.add(comboBoxDiscontinuidad);
 
         jPanel15.add(jPanel18);
 
@@ -2356,11 +2415,157 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_sliderTransparenciaStateChanged
 
     private void ComboBoxColorsTrazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxColorsTrazoActionPerformed
-        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+
+        switch (ComboBoxColorsTrazo.getSelectedIndex()) {
+            case 0:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_trazo(Color.BLACK);
+                } else {
+                    vi.getLienzo().setColor_trazo(Color.BLACK);
+                }
+
+                this.repaint();
+
+                break;
+
+            case 1:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_trazo(Color.RED);
+                } else {
+                    vi.getLienzo().setColor_trazo(Color.RED);
+                }
+
+                this.repaint();
+
+                break;
+
+            case 2:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_trazo(Color.BLUE);
+                } else {
+                    vi.getLienzo().setColor_trazo(Color.BLUE);
+                }
+
+                this.repaint();
+
+                break;
+
+            case 3:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_trazo(Color.WHITE);
+                } else {
+                    vi.getLienzo().setColor_trazo(Color.WHITE);
+                }
+
+                this.repaint();
+
+                break;
+            case 4:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_trazo(Color.YELLOW);
+                } else {
+                    vi.getLienzo().setColor_trazo(Color.YELLOW);
+                }
+
+                this.repaint();
+
+                break;
+
+            case 5:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_trazo(Color.GREEN);
+                } else {
+                    vi.getLienzo().setColor_trazo(Color.GREEN);
+                }
+
+                this.repaint();
+
+                break;
+        }
     }//GEN-LAST:event_ComboBoxColorsTrazoActionPerformed
 
     private void ComboBoxColorsRellenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxColorsRellenoActionPerformed
-        // TODO add your handling code here:
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+
+        switch (ComboBoxColorsRelleno.getSelectedIndex()) {
+            case 0:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_relleno(Color.BLACK);
+                } else {
+                    vi.getLienzo().setColor_relleno(Color.BLACK);
+                }
+
+                this.repaint();
+
+                break;
+
+            case 1:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_relleno(Color.RED);
+                } else {
+                    vi.getLienzo().setColor_relleno(Color.RED);
+                }
+
+                this.repaint();
+
+                break;
+
+            case 2:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_relleno(Color.BLUE);
+                } else {
+                    vi.getLienzo().setColor_relleno(Color.BLUE);
+                }
+
+                this.repaint();
+
+                break;
+
+            case 3:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_relleno(Color.WHITE);
+                } else {
+                    vi.getLienzo().setColor_relleno(Color.WHITE);
+                }
+
+                this.repaint();
+
+                break;
+            case 4:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_relleno(Color.YELLOW);
+                } else {
+                    vi.getLienzo().setColor_relleno(Color.YELLOW);
+                }
+
+                this.repaint();
+
+                break;
+
+            case 5:
+
+                if (vi.getLienzo().getSeleccionar() && vi.getLienzo().getFiguraSeleccionada() != null) {
+                    vi.getLienzo().getFiguraSeleccionada().setColor_relleno(Color.GREEN);
+                } else {
+                    vi.getLienzo().setColor_relleno(Color.GREEN);
+                }
+
+                this.repaint();
+
+                break;
+        }
     }//GEN-LAST:event_ComboBoxColorsRellenoActionPerformed
 
     private void bRojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRojoActionPerformed
@@ -2547,6 +2752,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JToggleButton botonRectan;
     private javax.swing.JToggleButton botonSeleccionador;
     private javax.swing.JToggleButton botonTrazoLibre;
+    private javax.swing.JComboBox<String> comboBoxDiscontinuidad;
     private javax.swing.JComboBox<String> comboBoxEspaciosColor;
     private javax.swing.JComboBox<String> comboBoxObjetos;
     private javax.swing.JDesktopPane escritorio;
