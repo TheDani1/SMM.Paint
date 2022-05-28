@@ -417,6 +417,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         figuras = new javax.swing.ButtonGroup();
+        gradientes = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jPanel12 = new javax.swing.JPanel();
@@ -451,6 +452,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Color coloresTrazo[] = {Color.BLACK, Color.RED, Color.BLUE, Color.WHITE, Color.YELLOW, Color.GREEN};
         ComboBoxColorsTrazo = new javax.swing.JComboBox<>(coloresTrazo);
         comboBoxDiscontinuidad = new javax.swing.JComboBox<>();
+        jPanel21 = new javax.swing.JPanel();
+        bGradienteVertical = new javax.swing.JToggleButton();
+        bGradienteHorizontal = new javax.swing.JToggleButton();
         jPanel14 = new javax.swing.JPanel();
         ToggleButtonMover = new javax.swing.JToggleButton();
         botonSeleccionador = new javax.swing.JToggleButton();
@@ -708,7 +712,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.add(jPanel13);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Atributos"));
-        jPanel15.setPreferredSize(new java.awt.Dimension(650, 50));
+        jPanel15.setPreferredSize(new java.awt.Dimension(750, 50));
 
         ComboBoxColors.setToolTipText("Color Figura");
         ComboBoxColors.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -814,6 +818,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel18.add(comboBoxDiscontinuidad);
 
         jPanel15.add(jPanel18);
+
+        gradientes.add(bGradienteVertical);
+        bGradienteVertical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/gradiente.png"))); // NOI18N
+        bGradienteVertical.setPreferredSize(new java.awt.Dimension(35, 35));
+        bGradienteVertical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGradienteVerticalActionPerformed(evt);
+            }
+        });
+        jPanel21.add(bGradienteVertical);
+
+        gradientes.add(bGradienteHorizontal);
+        bGradienteHorizontal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/gradienteh.png"))); // NOI18N
+        bGradienteHorizontal.setPreferredSize(new java.awt.Dimension(35, 35));
+        bGradienteHorizontal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGradienteHorizontalActionPerformed(evt);
+            }
+        });
+        jPanel21.add(bGradienteHorizontal);
+
+        jPanel15.add(jPanel21);
 
         jToolBar1.add(jPanel15);
 
@@ -2711,6 +2737,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_comboBoxDiscontinuidadActionPerformed
 
+    private void bGradienteVerticalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGradienteVerticalActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        
+        if(bGradienteVertical.isSelected()){
+            vi.getLienzo().setTipo_gradiente('v');
+        }
+    }//GEN-LAST:event_bGradienteVerticalActionPerformed
+
+    private void bGradienteHorizontalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGradienteHorizontalActionPerformed
+        VentanaInterna vi = (VentanaInterna) escritorio.getSelectedFrame();
+        
+        if(bGradienteHorizontal.isSelected()){
+            vi.getLienzo().setTipo_gradiente('h');
+        }
+    }//GEN-LAST:event_bGradienteHorizontalActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2758,6 +2800,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton bDisminuir;
     private javax.swing.JButton bEcualizador;
     private javax.swing.JButton bExtraccionBandas;
+    private javax.swing.JToggleButton bGradienteHorizontal;
+    private javax.swing.JToggleButton bGradienteVertical;
     private javax.swing.JButton bHistograma;
     private javax.swing.JButton bIluminar;
     private javax.swing.JButton bMi;
@@ -2784,6 +2828,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxObjetos;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.ButtonGroup figuras;
+    private javax.swing.ButtonGroup gradientes;
     private javax.swing.JMenuItem itemAcercade;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSlider jNumColors;
@@ -2800,6 +2845,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
